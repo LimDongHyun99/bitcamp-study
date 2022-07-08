@@ -1,23 +1,37 @@
-public class Lotto {
+package com.eomcs.lang.ex03;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+//# 정수 리터럴 - 다양한 기수법으로 정수를 표현하기
+//
 
-		int lotto[] = new int[6];	// 로또 번호를 입력받을 배열을 선언해준다.
-		
-		System.out.print("로또 번호 : ");
-		for(int i = 0; i < lotto.length; i++) {
-			int num = (int)(Math.random() * 45) + 1;	// 1~46까지의 임의의 수를 받는다.
-			lotto[i] = num;
-			for(int j = 0; j < i; j++) {	// 중복된 번호가 있으면 이전 포문으로 돌아가 다시 시행한다.
-				if(lotto[i] == lotto[j]) {
-					i--;
-					break;
-				}
-			}
-			System.out.print(lotto[i] + " ");	// 로또번호를 출력한다.
-		}
-
-	}
+public class Exam0210 {
+  public static void main(String[] args) {
+    //10진수 리터럴 
+    //- 코드에서 일반적으로 정수 값을 표현할 때 사용한다.
+    System.out.println(100);
+    
+    //8진수 리터럴
+    //- 코드를 작성할 때 잘 사용하지 않는다.
+    //- 0으로 시작해야 한다.
+    System.out.println(0144);
+    
+    //2진수 리터럴
+    //- 메모리의 상태를 직설적으로 보여주고 싶을 때 사용한다.
+    //- 0b 또는 0B로 시작한다.
+    System.out.println(0b1100100);
+    System.out.println(0B1100100);
+    
+    //- 숫자 앞에 0이 있어도 된다.
+    System.out.println(0b01100100);
+    System.out.println(0B01100100);
+    
+    //16진수 리터럴
+    //- 2진수를 간결하게 표현하기 위해 사용한다.
+    //- 0x 또는 0X 로 시작한다.
+    System.out.println(0x64);
+    System.out.println(0X64);
+    
+    //- 숫자 앞에 0이 있어도 된다.
+    System.out.println(0x064);
+    System.out.println(0X064);
+  }
 }
-		
