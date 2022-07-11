@@ -44,7 +44,7 @@ public class App {
         );
 
         System.out.println(
-          3 + "\t" + "제목입니다3\t" + 31 + "\t" + "임꺽정\t2022-07-08"
+          3 + "\t" + "제목입니다3\t" + 31 + "\t" + "임꺽정\t2022-07-08"         
         );
 
       } else if (menuNo == 2) {
