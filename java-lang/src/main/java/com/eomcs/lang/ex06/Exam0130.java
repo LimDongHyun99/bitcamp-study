@@ -11,9 +11,9 @@ public class Exam0130 {
     if (10 < 8 + 5) System.out.println("3333");
 
     // 그 외의 모든 데이터 타입은 컴파일 오류이다.
-    //    if (1) System.out.println("4444"); // 컴파일 오류!
-    //    if (3.14f) System.out.println("4444"); // 컴파일 오류!
-    //    if (0b0110 & 0b0011) System.out.println("4444"); // 컴파일 오류!
+      //  if (1) System.out.println("4444"); // 컴파일 오류!
+      //  if (3.14f) System.out.println("4444"); // 컴파일 오류!
+      //  if (0b0110 & 0b0011) System.out.println("4444"); // 컴파일 오류!
 
     // == 연산자 대신 =을 사용한 경우,(오타)
     int a = 100;
