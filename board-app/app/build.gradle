@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'eclipse'
 }
 
 repositories {
@@ -29,3 +30,61 @@ tasks.withType(JavaCompile) {
     // 자바 클래스를 실행시킬 JVM의 최소 버전
     targetCompatibility = '11'
 }
+
+
+// CLI 환경(명령창, 콘솔창)에서 자바 소스를 컴파일 할 때 적용할 옵션
+tasks.withType(JavaCompile) {
+    // 프로젝트의 소스 파일 인코딩을 gradle에게 알려준다.
+    // $javac -encoding UTF-8 ..
+    options.encoding = 'UTF-8' 
+
+    // 소스 파일을 작성할 때 사용할 자바 버전
+    sourceCompatibility = '11'
+
+    // 자바 클래스를 실행시킬 JVM의 최소 버전
+    targetCompatibility = '11'
+}
+
+// .class 파일을 둘 폴더를 지정하지 않으면 
+// Gradle 은 기본 출력 폴더의 경로로 'bin/default' 를 사용한다.
+// 
+// 그러나 이클립스 설정 파일을 만드는 과정에서 
+// 각 소스 경로에 대한 기본 출력 폴더가 bin/main 으로 따로 설정되어 있다.
+// 그래서 실제 자바 소스 파일을 컴파일하면 bin/default 가 아니라 
+// bin/main 폴더에 .class 파일이 저장된다.
+// 
+/*
+eclipse {
+	classpath {
+        defaultOutputDir = file('myokok')
+        
+		file {
+        	whenMerged { 
+    	    	// use default Output for all source-folders. see also defaultOutputDir per project
+	        	entries.each { source ->
+					if (source.kind == 'src' && !source.path.startsWith('/')) { // only Source-folders in the project starting with '/' are project-references
+						source.output = null
+        			}
+				}
+    	    }
+	    }
+        
+	}
+}
+*/
+
+// eclipse에서 사용할 프로젝트 정보 설정하기 
+eclipse {
+    project {
+        name = "java-lang"
+        // 프로젝트 이름을 지정하지 않으면 build.gradle 파일이 있는
+        // 폴더 이름을 프로젝트 이름으로 사용한다.
+    }
+    jdt {
+      //if you want to alter the java versions (by default they are configured with gradle java plugin settings):
+      sourceCompatibility = 11
+      targetCompatibility = 11
+      javaRuntimeName = "JavaSE-11"
+    }
+}
+
