@@ -131,6 +131,14 @@ public class Prompt {
     return Integer.parseInt(str); //"123" ==> 123, "5" ==> 5, "ok" ==> 실행 오류!
   }
 
+  static int input(String title) {
+    System.out.println(title)
+    String str = keyboardInput.nextLine();
+    return Integer.parseInt(str);
+
+  }
+
+
   static int inputInt(String title) {
     System.out.print(title);
     String str = keyboardInput.nextLine();
