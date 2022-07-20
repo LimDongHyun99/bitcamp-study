@@ -1,4 +1,4 @@
-package com.eomcs.lang.quiz.ex01;
+package com.eomcs.lang.quiz.myex01;
 
 public class Test02_1 {
 
@@ -15,7 +15,7 @@ public class Test02_1 {
 
     while (value != 0) {
       r ^= 1;
-      value &= (value -1);
+      value &= (value - 1);
     }
 
     return r;

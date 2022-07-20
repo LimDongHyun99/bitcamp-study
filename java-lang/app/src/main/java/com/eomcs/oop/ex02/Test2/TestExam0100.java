@@ -25,43 +25,36 @@ package com.eomcs.oop.ex02.Test2;
 //   => private: 접근 불가! 그 멤버가 속한 클래스의 내부에서만 접근 가능
 //8) 생성자 도입: 인스턴스를 생성할 때 값을 초기화시키는 특별한 메서드
 //
-public class Exam0100 {
+public class TestExam0100 {
 
   public static void main(String[] args) {
 
-    String name;
-    int kor;
-    int eng;
-    int math;
-    int sum;
-    float aver;
+    Score s1 = new Score();
+    s1.name = "홍길동";
+    s1.kor = 100;
+    s1.eng = 90;
+    s1.math = 85;
+    s1.sum = s1.kor + s1.eng + s1.math;
+    s1.aver = (float) s1.sum / 3;
 
-    name = "홍길동";
-    kor = 100;
-    eng = 90;
-    math = 85;
-    sum = kor + eng + math;
-    aver = (float) sum / 3;
+    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.aver);
 
-    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", name, kor, eng, math, sum, aver);
+    Score s2 = new Score();
+    s2.name = "임꺽정";
+    s2.kor = 90;
+    s2.eng = 80;
+    s2.math = 75;
+    s2.sum = s2.kor + s2.eng + s2.math;
+    s2.aver = (float) s2.sum / 3;
 
-    name = "임꺽정";
-    kor = 90;
-    eng = 80;
-    math = 75;
-    sum = kor + eng + math;
-    aver = (float) sum / 3;
+    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.aver);
 
-    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", name, kor, eng, math, sum, aver);
+    Score s3 = new Score();
+    s3.name = "유관순";
+    s3.kor = 80;
+    s3.eng = 70;
+    s3.math = 65;
 
-    name = "유관순";
-    kor = 80;
-    eng = 70;
-    math = 65;
-    sum = kor + eng + math;
-    aver = (float) sum / 3;
-
-    System.out.printf("%s: %d, %d, %d, %d, %.1f\n", name, kor, eng, math, sum, aver);
   }
 }
 
