@@ -1,35 +1,17 @@
-package com.bitcamp.board;
+package com.bitcamp.board.dao;
+
+import com.bitcamp.board.domain.Board;
 
 // 게시글 목록을 관리하는 역할
 //
-public class BoardList {
+public class BoardList extends ObjectList {
 
-  static final int DEFAULT_SIZE = 3;
-
-  int boardCount; 
-  Board[] boards; 
   int no = 0;
 
-  // 생성자
-  BoardList() {
-    this.boards = new Board[DEFAULT_SIZE];
-  }
-
-  BoardList(int initCapacity) {
-    this.boards = new Board[initCapacity];
-  }
-
-  // 목록에 저장된 인스턴스를 꺼내서 리턴한다.
-  Board[] toArray() {
-    Board[] arr = new Board[this.boardCount];
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = this.boards[i];
-    }
-    return arr;
-  }
-
+  // 수퍼 클래스의 get() 메서드는 인덱스로 항목을 찾는다.
+  // 그래서 
   // 게시글 번호에 해당하는 Board 인스턴스를 찾아 리턴한다.
-  Board get(int boardNo) {
+  public Board findBy(int boardNo) {
     for (int i = 0; i < this.boardCount; i++) {
       if (this.boards[i].no == boardNo) {
         return this.boards[i];
@@ -39,7 +21,7 @@ public class BoardList {
   }
 
   // Board 인스턴스를 배열에 저장한다.
-  void add(Board board) {
+  public void add(Board board) {
     if (this.boardCount == this.boards.length) {
       grow();
     }
@@ -47,7 +29,8 @@ public class BoardList {
     this.boards[this.boardCount++] = board;
   }
 
-  boolean remove(int boardNo) {
+  @Override
+  public boolean removeByBoardNo(int boardNo) {
     int boardIndex = -1;
     for (int i = 0; i < this.boardCount; i++) {
       if (this.boards[i].no == boardNo) {
@@ -72,7 +55,7 @@ public class BoardList {
     return true;
   }
 
-  void grow() {
+  private void grow() {
     int newSize = this.boards.length + (this.boards.length >> 1);
     Board[] newArray = new Board[newSize];
     for (int i = 0; i < this.boards.length; i++) {
@@ -81,7 +64,7 @@ public class BoardList {
     this.boards = newArray;
   }
 
-  int nextNo() {
+  private int nextNo() {
     return ++no;
   }
 }
