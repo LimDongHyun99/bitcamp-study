@@ -26,8 +26,8 @@ public class Exam0420 {
     }
 
     public void compute() {
-      this.sum = this.kor + this.eng + this.math;
-      this.average = this.sum / 3f;
+      sum = kor + eng + math;
+      average = sum / 3f;
     }
   }
 

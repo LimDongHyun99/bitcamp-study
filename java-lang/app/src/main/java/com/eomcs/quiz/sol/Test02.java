@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex02;
+package com.eomcs.quiz.ex02.sol;
 
 // 출처: codefights.com
 //
@@ -8,7 +8,7 @@ package com.eomcs.quiz.ex02;
 // [2, 4, 5, 6, 4, 3, 7, 8] => [4, 3, 7, 8, 2, 4, 5, 6]
 //
 // [시간 복잡도]
-// - ?
+// - O(n) : n은 배열의 개수이다.
 //
 public class Test02 {
 
@@ -21,7 +21,6 @@ public class Test02 {
     for (int i = 0; i < results.length; i++) {
       if (values[i] != results[i]) {
         System.out.println(false);
-
         return;
       }
     }
@@ -29,24 +28,11 @@ public class Test02 {
   }
 
   static void changeValuePosition(int[] values) {
-    // 이 메서드를 완성하시오!
-
-    // 배열의  절반을 맞바꿀 것이기 때문에
-    // 배열의 절반만 반복한다.
-    int halfIndex = values.length / 2;
-    for (int i = 0; i < halfIndex; i++) {
-
-      // 맞바꿀 항목의 인덱스를 구한다. 
-      int target = i + halfIndex;
-
-      // 두 항목의 값을 바꾸기 전에 i 번째 항목의 값을 임시 변수에 저장해둔다.
-      int temp = values[i];
-
-      // target 인덱스의 값을 i번째 항목에 넣는다.
-      values[i] = values[target];
-
-      //temp에 값을 임시 보관한다.
-      values[target] = temp;
+    int tmp;
+    for (int i = 0; i < values.length / 2; i++) {
+      tmp = values[i + values.length / 2];
+      values[i + values.length / 2] = values[i];
+      values[i] = tmp;
     }
   }
 }

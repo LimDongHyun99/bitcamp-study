@@ -14,7 +14,7 @@ public class Exam0230 {
     }
     public void minus(int value) {
       this.result -= value;
-    }
+    } 
   }
 
   public static void main(String[] args) {
