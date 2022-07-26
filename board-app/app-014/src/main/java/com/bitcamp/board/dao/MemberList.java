@@ -5,9 +5,28 @@ import com.bitcamp.board.domain.Member;
 // 회원 목록을 관리하는 역할
 //
 public class MemberList {
-  public MemberList() {}
+
+  private static final int DEFAULT_SIZE = 3;
+
+  private int memberCount; 
+  private Member[] members; 
   private int no = 0;
 
+  public MemberList() {
+    this.members = new Member[DEFAULT_SIZE];
+  }
+
+  public MemberList(int initCapacity) {
+    this.members = new Member[initCapacity];
+  }
+
+  public Member[] toArray() {
+    Member[] arr = new Member[this.memberCount];
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = this.members[i];
+    }
+    return arr;
+  }
 
   public Member get(int memberNo) {
     for (int i = 0; i < this.memberCount; i++) {

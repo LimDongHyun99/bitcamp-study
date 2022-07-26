@@ -9,7 +9,7 @@ public class Calculator2 {
   }
 
   public void minus(int value) {
-    this.result -= value;
+    result -= value;
   }
 
   public void multiple(int value) {
