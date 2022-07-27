@@ -5,7 +5,7 @@ package com.eomcs.basic.ex01;
 
 public class Exam0120 {
 
-  static class My {
+  static class My extends Object {
 
   }
 

@@ -3,15 +3,14 @@ package com.bitcamp.board;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Selector {
+public class lunchSelector_v1 {
   public static void main(String[] args) {
 
     String[] names = {
-        "조주연","김라윤","최지연","이헌식","조영아","안치운",
-        "장현경","박병민","유제동","김봉경","최종찬","장슬기",
-        "김원태","유성민","문채원","유종현","박지민","신우섭",
-        "주  영","황의찬","임은지","임동현","김민구",
-        "박진우","임가온","김연정","최유민","윤주현"
+        "우육면", "돈까스", "백반", "한식뷔페",
+        "부대찌개", "편의점", "짬뽕", "뼈해장국",
+        "쌀국수", "도삭면", "초밥", "파스타",
+        "분식", "햄버거", "덮밥", 
     };
 
     ArrayList<String> list = new ArrayList<>();
@@ -31,11 +30,12 @@ public class Selector {
 
     Scanner keyboardInput = new Scanner(System.in);
 
-    System.out.println("준비!!!");
+    System.out.println("오늘 뭐먹지?");
     keyboardInput.nextLine();
 
     while (list.size() > 0) {
       int no = (int)(Math.random() * list.size());
+      System.out.println("오늘의 점심 메뉴! ");
       System.out.println("===> " + list.remove(no));
       keyboardInput.nextLine();
     }

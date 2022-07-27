@@ -37,7 +37,7 @@ public class MemberHandler {
 
       displayBlankLine();
     } // 게시판 while
-  }
+  } 
 
   private static void displayHeadline() {
     System.out.println("=========================================");

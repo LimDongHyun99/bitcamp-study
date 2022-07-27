@@ -22,8 +22,9 @@ public class Exam0131 {
     obj2.gender = 1;
     obj2.working = false;
 
-    System.out.println(obj1 == obj2);
-    System.out.println(obj1.equals(obj2));
+    System.out.println(obj1 == obj2); // 주소값이 같은지 확인하는 것
+    System.out.println(obj1.equals(obj2)); // equals는 원래 (일반)주소값이 같은지 확인하는 것
+    // equals를 String 에서 사용시 문자열 내용이 같은지 확인함
 
     // 결론!
     // => Object에서 상속 받은 것을 그대로 사용하면 equals()는 인스턴스가 같은지 비교한다.
@@ -43,9 +44,9 @@ public class Exam0131 {
     @Override
     public boolean equals(Object obj) {
       if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
+
+        if (obj == null)
+          return false;
       if (getClass() != obj.getClass())
         return false;
       My other = (My) obj;

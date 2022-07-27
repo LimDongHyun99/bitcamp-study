@@ -4,14 +4,34 @@ import com.bitcamp.board.domain.Board;
 
 // 게시글 목록을 관리하는 역할
 //
-public class BoardList extends ObjectList {
+public class BoardList {
 
-  int no = 0;
+  private static final int DEFAULT_SIZE = 3;
 
-  // 수퍼 클래스의 get() 메서드는 인덱스로 항목을 찾는다.
-  // 그래서 
+  private int boardCount; 
+  private Board[] boards; 
+  private int no = 0;
+
+  // 생성자
+  public BoardList() {
+    this.boards = new Board[DEFAULT_SIZE];
+  }
+
+  public BoardList(int initCapacity) {
+    this.boards = new Board[initCapacity];
+  }
+
+  // 목록에 저장된 인스턴스를 꺼내서 리턴한다.
+  public Board[] toArray() {
+    Board[] arr = new Board[this.boardCount];
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = this.boards[i];
+    }
+    return arr;
+  }
+
   // 게시글 번호에 해당하는 Board 인스턴스를 찾아 리턴한다.
-  public Board findBy(int boardNo) {
+  public Board get(int boardNo) {
     for (int i = 0; i < this.boardCount; i++) {
       if (this.boards[i].no == boardNo) {
         return this.boards[i];
@@ -29,8 +49,7 @@ public class BoardList extends ObjectList {
     this.boards[this.boardCount++] = board;
   }
 
-  @Override
-  public boolean removeByBoardNo(int boardNo) {
+  public boolean remove(int boardNo) {
     int boardIndex = -1;
     for (int i = 0; i < this.boardCount; i++) {
       if (this.boards[i].no == boardNo) {

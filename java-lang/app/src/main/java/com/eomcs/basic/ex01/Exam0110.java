@@ -7,7 +7,7 @@ package com.eomcs.basic.ex01;
 //컴파일러는 자동으로 Object를 상속 받는다.
 public class Exam0110 /*extends Object*/ {
 
-  static class My /*extends Object*/ {
+  static class My {
   }
 
   public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class Exam0110 /*extends Object*/ {
     // => 레퍼런스가 가리키는 인스턴스가 지정한 클래스를 인스턴스 이거나 또는 조상으로 갖는지 검사한다.
     Object obj = new My();
     // Object의 레퍼런스에 My 인스턴스 주소를 저장할 수 있다는 것은
-    // My 클래스가 Object 크래스의 서브 클래스임을 증명하는 것이다.
+    // My 클래스가 Object 클래스의 서브 클래스임을 증명하는 것이다.
 
     System.out.println(obj instanceof My);
     System.out.println(obj instanceof String);
