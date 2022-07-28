@@ -17,7 +17,7 @@ public class Test05 {
   }
 
   static int countWaysToChangeDigit(int value) {
-    int answer = 0;  
+    int answer = 0; 
     // 이 메서드를 완성하시오!
     return answer;
   }
