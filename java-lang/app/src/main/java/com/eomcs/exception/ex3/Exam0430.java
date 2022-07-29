@@ -15,7 +15,6 @@ public class Exam0430 {
       throw new SQLException();
     else if (i == 3)
       throw new IOException();
-
   }
 
   public static void main(String[] args) {

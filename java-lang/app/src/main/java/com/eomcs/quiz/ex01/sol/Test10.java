@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01.sol;
+package com.eomcs.quiz.ex01;
 
 // 출처: codefights.com
 // 
@@ -33,16 +33,17 @@ an integer from 0 to n-1
  */
 //
 // [시간 복잡도]
-// - O(1) : 계산의 복잡도는 일정하다.
+// - ?
 //
 public class Test10 {
 
   public static void main(String[] args) {
-    System.out.println(circleOfNumbers(10, 2)); 
+    System.out.println(circleOfNumbers(10, 2) == 7); 
 
   }
 
   static int circleOfNumbers(int n, int firstNumber) {
-    return (firstNumber + n / 2);
+    // 이 메서드를 완성하시오!
+    return 0;
   }
 }
