@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 
 // 출처: codefights.com
 //
@@ -47,7 +47,7 @@ true, if the point (xa, ya) lies inside the circle (xc, yc, rc), false otherwise
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(1): 시간 복잡도는 일정하다.
 //
 public class Test12 {
   public static void main(String[] args) {
@@ -56,7 +56,15 @@ public class Test12 {
   }
 
   static boolean isInsideTheCircle(int xa, int ya, int xc, int yc, int rc) {
-    // 이 메서드를 완성하시오!
+    int dist = (xa - xc) * (xa - xc) + (ya - yc) * (ya - yc);
+    rc *= rc;
+    if (dist <= rc) {
+      return true;
+    }
     return false;
   }
 }
+
+// 피타고라스의 정리 이용
+// => a^2 + b^2 = c^2
+// 

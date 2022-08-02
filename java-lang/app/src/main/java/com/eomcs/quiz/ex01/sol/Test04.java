@@ -1,65 +1,31 @@
 package com.eomcs.quiz.ex01.sol;
 
 // 출처: codefights.com
-// 한 줄에 버그가 있다. 고쳐라! 
-/*
-등비수열(geometric progression 또는 geometric sequence)인지 검사하라.
-등비수열이면 true, 아니면 flase를 출력하라.
-
-등비수열이란?
-=> 각 항이 그 앞 항과 일정한 비를 가지는 수열.
-=> 이 일정한 비를 공비(common ratio)라고 한다.
-
-Example
-isGeometricProgression([1, 4, 16]) = true   <--- 공비는 4
-isGeometricProgression([2, 4, 8, 17, 34]) = false
- */
-
-/* 원문
-A geometric progression is a sequence of numbers 
-where each term after the first is found 
-by multiplying the previous one by a fixed, non-zero number.
-
-Example
-
-isGeometricProgression([1, 4, 16]) = true
-isGeometricProgression([2, 4, 8, 17, 34]) = false
-[input] array.integer sequence
-
-array of integers
-[output] boolean
-
-true if sequence represents a geometric progression,
- */
-// 
+//
+// 주어진 숫자에 짝수가 몇 개인지 세어라.
+// 예) 
+// 1010 => 2
+// 123 => 1
+//
 // [시간 복잡도]
-// - O(n) : n은 배열의 길이
+// - O(k) : k는 입력 값의 10진수 자릿수이다.
 //
 public class Test04 {
 
   public static void main(String[] args) {
-    System.out.println(isGeometricProgression(new int[]{1,4,16}) == true);
-    System.out.println(isGeometricProgression(new int[]{2,4,8,17,34}) == false);
-
+    System.out.println(countEvenNumber(1238694636) == 6);
+    System.out.println(countEvenNumber(2567884) == 5);
   }
 
-  static boolean isGeometricProgression(int[] sequence) {
-    for (int i = 2; i < sequence.length; i++) {
-      if (sequence[i] * sequence[0] != sequence[i - 1] * sequence[1]) {
-        return false;
+  static int countEvenNumber(int value) {
+    int result = 0;
+    int n = value;
+    while(n != 0) {
+      if ((n % 2) == 0) {
+        result++;
       }
+      n /= 10;
     }
-    return true;
+    return result;
   }
 }
-
-// 등비수열 예) 
-//   2, 4, 8, 16, 32, ...
-//   공비 => 2
-// 
-// 등비수열의 성질
-//   첫항 a, 공비 r, n번째 항
-//   an = ar^(n-1)
-// 
-//   a1 * an     = ar^0 * ar^(n-1) = a^2r^(0 + n - 1) = a^2r^(n - 1)
-//   a2 * a(n-1) = ar^1 * ar^(n-2) = a^2r^(1 + n - 2) = a^2r^(n - 1)

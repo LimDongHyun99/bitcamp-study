@@ -1,38 +1,37 @@
 package com.eomcs.quiz.ex01.sol;
 
-// 출처: codefights.com
-//
-// 배열의 전체 길이를 L이라고 하자.
-// 배열을 절반(L/2)으로 나눌 때, 앞쪽 부분과 뒤쪽 부분의 위치를 바꿔라.
-// 예)
-// [2, 4, 5, 6, 4, 3, 7, 8] => [4, 3, 7, 8, 2, 4, 5, 6]
-//
+// [문제] 
+// 패리티(parity)를 구하라!
+// - 1의 개수가 홀수 개이면 1
+// - 1의 개수가 짝수 개이면 0
+// [훈련 목표]
+// - 관계 연산자 및 비트 연산자, 비트 이동 연산자 활용
+// - 반복문 활용
+// - 메서드 파라미터 및 리턴 값 다루기
 // [시간 복잡도]
-// - O(n) : n은 배열의 개수이다.
-//
+// - O(n), n은 비트 개수
 public class Test02 {
 
   public static void main(String[] args) {
-    int[] values = {2, 4, 5, 6, 4, 3, 7, 8};
-    changeValuePosition(values);
+    int p = parity(0b01100011);
+    System.out.println(p == 0); // true
 
-    int[] results = {4, 3, 7, 8, 2, 4, 5, 6};
+    System.out.println("------------------------");
 
-    for (int i = 0; i < results.length; i++) {
-      if (values[i] != results[i]) {
-        System.out.println(false);
-        return;
-      }
-    }
-    System.out.println(true);
+    p = parity(0b01010111_01100011);
+    System.out.println(p == 1); // true
   }
 
-  static void changeValuePosition(int[] values) {
-    int tmp;
-    for (int i = 0; i < values.length / 2; i++) {
-      tmp = values[i + values.length / 2];
-      values[i + values.length / 2] = values[i];
-      values[i] = tmp;
+  static int parity(int value) {
+    int r = 0;
+
+    while (value != 0) {
+      r ^= (value & 1);
+      value >>>= 1;
+      System.out.println("==>");
     }
+
+    return r;
   }
+
 }

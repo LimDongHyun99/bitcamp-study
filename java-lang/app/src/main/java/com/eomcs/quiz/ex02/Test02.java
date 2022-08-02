@@ -21,7 +21,6 @@ public class Test02 {
     for (int i = 0; i < results.length; i++) {
       if (values[i] != results[i]) {
         System.out.println(false);
-
         return;
       }
     }
@@ -30,23 +29,5 @@ public class Test02 {
 
   static void changeValuePosition(int[] values) {
     // 이 메서드를 완성하시오!
-
-    // 배열의  절반을 맞바꿀 것이기 때문에
-    // 배열의 절반만 반복한다.
-    int halfIndex = values.length / 2;
-    for (int i = 0; i < halfIndex; i++) {
-
-      // 맞바꿀 항목의 인덱스를 구한다. 
-      int target = i + halfIndex;
-
-      // 두 항목의 값을 바꾸기 전에 i 번째 항목의 값을 임시 변수에 저장해둔다.
-      int temp = values[i];
-
-      // target 인덱스의 값을 i번째 항목에 넣는다.
-      values[i] = values[target];
-
-      //temp에 값을 임시 보관한다.
-      values[target] = temp;
-    }
   }
 }

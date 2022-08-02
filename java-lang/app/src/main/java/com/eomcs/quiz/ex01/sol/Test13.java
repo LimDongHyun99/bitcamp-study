@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 
 //출처: codefights.com
 //
@@ -27,7 +27,7 @@ positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n/k) = O(n) : n은 k의 배수들의 개수이다.
 //
 public class Test13 {
   public static void main(String[] args) {
@@ -36,7 +36,13 @@ public class Test13 {
 
   static int sumOfMultiples(int n, int k) {
     int result = 0;
-    // 이 메서드를 완성하시오!
+
+    for (int i = 1; i <= n; i++) {
+      if (i % k == 0) {
+        result += i;
+      }
+    }
+
     return result;
   }
 }

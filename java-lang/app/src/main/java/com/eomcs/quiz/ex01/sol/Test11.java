@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 
 // 출처: codefights.com
 //
@@ -18,7 +18,7 @@ a string of lowercase latin letters
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(26n) = O(n) : n은 문자열의 개수
 //
 public class Test11 {
 
@@ -27,8 +27,21 @@ public class Test11 {
   }
 
   static int differentSymbolsNaive(String s) {
+
     int result = 0;
-    // 이 메서드를 완성하시오!
+
+    for (int i = 0; i < 26; i++) {
+      boolean found = false;
+      for (int j = 0; j < s.length(); j++) {
+        if (s.charAt(j) == 'a' + i) {
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        result++;
+      }
+    }
     return result;
   }
 }

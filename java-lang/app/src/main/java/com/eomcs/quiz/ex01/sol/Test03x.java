@@ -1,40 +1,43 @@
 package com.eomcs.quiz.ex01.sol;
 
-// 출처: codefights.com
-//
-// 숫자 배열이 있다.
-// 나누어 0이 떨어지는 수가 몇 쌍이 있는지 구하라!
+// [문제] 
+// 두 위치의 비트 값을 맞교환 하라! 
+// 예) 값:   0b00101100_01110001
+//     2번째(2^2 자리) 비트와 13번째(2^13 자리) 비트
+//     결과: 0b00001100_01110101
+//  
+// [훈련 목표]
+// - 관계 연산자 및 비트 연산자, 비트 이동 연산자 활용
+// - 반복문 활용
+// - 메서드 파라미터 및 리턴 값 다루기
 //
 // [시간 복잡도]
-// - O(n) : n은 배열의 개수이다.
+// - O(1) : 시간 복잡도는 입력 크기와 상관없다.
 //
 public class Test03x {
 
   public static void main(String[] args) {
-    int[] values = {2, 4, 5, 8, 10};
-    System.out.println(divisorsPairs(values) == 5);
+    int r = swapBits(0b00101100_01110001, 2, 13);
+    System.out.println(r == 0b00001100_01110101); // true
 
+    r = swapBits(0b01010111_01100011, 6, 10);
+    System.out.println(r == 0b01010111_01100011); // true
   }
 
-  public static int divisorsPairs(int[] sequence) {
-    int result = 0;
+  static int swapBits(int value, int i, int j) { 
+    // 해당 위치의 비트 값을 알아낸다.
+    int iBit = (value >>> i) & 1;
+    int jBit = (value >>> j) & 1;
 
-    // 배열은 0 번 항목부터 반복한다.
-    for (int i = 0; i < sequence.length; i++) {
-
-      // 나눌 값은 i 번 다음 항목과 나누기 계산한다.
-      for (int j = i + 1; j <sequence.length; j++) {
-        //System.out.println(sequence[i] + "<--->" + sequence[j]);
-        int iValue = sequence[i]; // i 번째 항목의 값을 꺼내고
-        int jValue = sequence[j]; // i 번 다음 항목의 값을 꺼낸다.
-
-        // 두 항목을 바꿔가면서 나눗셈을 하여 0으로 떨어지는지 조사한다.
-        if ((iValue % jValue == 0) || ((jValue % iValue) == 0)) {
-          result++;
-        }
-      }
+    // 두 비트의 값이 다를 경우에만 비트 맞교환을 수행한다.
+    if (iBit != jBit) {
+      // 두 비트의 값만 투과시킬 마스크를 만든다.
+      int iMask = 1 << i; // i 번째 비트가 1인 마스크
+      int jMask = 1 << j; // j 번째 비트가 1인 마스크
+      int bitMask = iMask | jMask; // i 번째와 j 번째가 1인 마스크
+      value = value ^ bitMask; // 두 비트를 맞교환하려는 값에 마스크를 XOR 한다.
     }
-
-    return result;
+    return value;
   }
+
 }

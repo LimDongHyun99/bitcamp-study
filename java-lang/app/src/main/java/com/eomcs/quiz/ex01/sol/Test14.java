@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 
 // 출처: codefights.com
 //
@@ -22,7 +22,7 @@ positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n) : n은 10진수의 자릿수
 //
 public class Test14 {
   public static void main(String[] args) {
@@ -32,7 +32,10 @@ public class Test14 {
 
   static int numberReverse(int input) {
     int reversed = 0;
-    // 이 메서드를 완성하시오!
+    while (input > 0) {
+      reversed = reversed * 10 + input % 10;
+      input /= 10;
+    }
     return reversed;
   }
 }

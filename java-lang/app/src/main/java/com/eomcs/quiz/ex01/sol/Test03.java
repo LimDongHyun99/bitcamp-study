@@ -1,31 +1,35 @@
 package com.eomcs.quiz.ex01.sol;
 
-// 출처: codefights.com
-//
-// 숫자 배열이 있다.
-// 나누어 0이 떨어지는 수가 몇 쌍이 있는지 구하라!
+// [문제] 
+// 두 위치의 비트 값을 맞교환 하라! 
+// 예) 값:   0b00101100_01110001
+//     2번째(2^2 자리) 비트와 13번째(2^13 자리) 비트
+//     결과: 0b00001100_01110101
+//  
+// [훈련 목표]
+// - 관계 연산자 및 비트 연산자, 비트 이동 연산자 활용
+// - 반복문 활용
+// - 메서드 파라미터 및 리턴 값 다루기
 //
 // [시간 복잡도]
-// - O(n) : n은 배열의 개수이다.
+// - O(1) : 시간 복잡도는 입력 크기와 상관없다.
 //
 public class Test03 {
 
   public static void main(String[] args) {
-    int[] values = {2, 4, 8};
-    System.out.println(divisorsPairs(values) == 3);
+    int r = swapBits(0b00101100_01110001, 2, 13);
+    System.out.println(r == 0b00001100_01110101); // true
+
+    r = swapBits(0b01010111_01100011, 6, 10);
+    System.out.println(r == 0b01010111_01100011); // true
   }
 
-  public static int divisorsPairs(int[] sequence) {
-    int result = 0;
-
-    for (int i = 0; i < sequence.length; i++) {
-      for (int j = i + 1; j < sequence.length; j++) {
-        if (sequence[i] % sequence[j] == 0 || sequence[j] % sequence[i] == 0) {
-          result++;
-        }
-      }
+  static int swapBits(int value, int i, int j) { 
+    if (((value >>> i) & 1) != ((value >>> j) & 1)) {
+      int bitMask = (1 << i) | (1 << j);
+      value ^= bitMask;  
     }
-
-    return result;
+    return value;
   }
+
 }

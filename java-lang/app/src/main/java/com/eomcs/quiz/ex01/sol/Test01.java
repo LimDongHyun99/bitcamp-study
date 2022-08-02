@@ -1,29 +1,32 @@
 package com.eomcs.quiz.ex01.sol;
 
-// 출처: codefights.com
-//
-// 숫자 배열에서 각 이웃하는 숫자간의 차가 가장 큰 것을 알아내기
-// 예)
-// [2, 4, 1, 0] => 3
-// 
+// [문제] 
+// 파라미터로 주어진 정수 값을 2진수로 표현했을 때 1로 설정된 비트의 개수를 구하라!
+// [훈련 목표]
+// - 관계 연산자 및 비트 연산자, 비트 이동 연산자 활용
+// - 반복문 활용
+// - 메서드 파라미터 및 리턴 값 다루기
 // [시간 복잡도]
-// - O(n) : n은 배열의 개수이다.
-//
+// - O(n), n은 비트 개수
 public class Test01 {
 
   public static void main(String[] args) {
-    System.out.println(maxDiff(new int[]{2, 4, 1, 0}) == 3);
-    System.out.println(maxDiff(new int[]{3, 1, 4, 3, 8, 7}) == 5);
+    int c = countBits(0b01100011);
+    System.out.println(c == 4); // true
+
+    c = countBits(0b01010111_01100011);
+    System.out.println(c == 9); // true
   }
 
-  static int maxDiff(int[] values) {
-    int answer = 1;
-    for (int i = 1; i < values.length; i++) {
-      if (Math.abs(values[i] - values[i - 1]) > answer) {
-        answer = Math.abs(values[i] - values[i-1]);
-      }
+  static int countBits(int value) {
+    int r = 0;
+
+    while (value != 0) {
+      r += (value & 1); // 1
+      value >>>= 1;
     }
 
-    return answer;
+    return r;
   }
+
 }
