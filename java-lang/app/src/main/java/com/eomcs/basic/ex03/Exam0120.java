@@ -41,26 +41,26 @@ public class Exam0120 {
     list.add(1, "xxx");
     System.out.println(list); // [bbb, xxx, ddd, null, eee, null, aaa, bbb]
 
-    list.add(1, "yyy");
-    System.out.println(list); // [bbb, yyy, xxx, ddd, null, eee, null, aaa, bbb]
-
-    list.add(0, "zzz");
-    System.out.println(list); // [zzz, bbb, yyy, xxx, ddd, null, eee, null, aaa, bbb]
-
-    list.add(5, "ttt");
-    System.out.println(list); // [zzz, bbb, yyy, xxx, ddd, ttt, null, eee, null, aaa, bbb]
-
-    // set(index, value)
-    // - 해당 위치의 값을 변경한다.
-    list.set(1, "aaa");
-    System.out.println(list); // [zzz, aaa, yyy, xxx, ddd, ttt, null, eee, null, aaa, bbb]
-
-    // get(index) : 해당 위치의 값을 리턴한다.
-    System.out.println(list.get(2)); // yyy
-    System.out.println(list.get(3)); // xxx
-
-    // 인덱스가 유효하지 않을 때 IndexOutOfBoundsException 예외가 발생한다.
-    //    System.out.println(list.get(100));
+//    list.add(1, "yyy");
+//    System.out.println(list); // [bbb, yyy, xxx, ddd, null, eee, null, aaa, bbb]
+//
+//    list.add(0, "zzz");
+//    System.out.println(list); // [zzz, bbb, yyy, xxx, ddd, null, eee, null, aaa, bbb]
+//
+//    list.add(5, "ttt");
+//    System.out.println(list); // [zzz, bbb, yyy, xxx, ddd, ttt, null, eee, null, aaa, bbb]
+//
+//    // set(index, value)
+//    // - 해당 위치의 값을 변경한다.
+//    list.set(1, "aaa");
+//    System.out.println(list); // [zzz, aaa, yyy, xxx, ddd, ttt, null, eee, null, aaa, bbb]
+//
+//    // get(index) : 해당 위치의 값을 리턴한다.
+//    System.out.println(list.get(2)); // yyy
+//    System.out.println(list.get(3)); // xxx
+//
+//    // 인덱스가 유효하지 않을 때 IndexOutOfBoundsException 예외가 발생한다.
+//    //    System.out.println(list.get(100));
   }
 }
 
