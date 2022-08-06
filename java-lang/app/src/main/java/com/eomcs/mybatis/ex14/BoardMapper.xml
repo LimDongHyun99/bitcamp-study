@@ -5,25 +5,23 @@
 
 <mapper namespace="step25.ex11.BoardDao">
 
-  <resultMap type="Board" id="BoardMap">
-    <id column="bno" property="no"/>
-    <result column="titl" property="title"/>
-    <result column="cont" property="content"/>
-    <result column="rdt" property="registeredDate"/>
-  </resultMap>
-  
-  <select id="selectList" 
-          resultMap="BoardMap" 
-          parameterType="map">
-    select bno, titl, rdt 
-    from ex_board
-    order by bno desc
-  </select>
-  
-  <insert id="insert" parameterType="Board">
-    insert into ex_board(bno,titl,cont,rdt) 
-    values(#{no},#{title},#{content},now())
-  </insert>
+	<resultMap type="Board" id="BoardMap">
+		<id column="bno" property="no" />
+		<result column="titl" property="title" />
+		<result column="cont" property="content" />
+		<result column="rdt" property="registeredDate" />
+	</resultMap>
+
+	<select id="selectList" resultMap="BoardMap" parameterType="map">
+		select bno, titl, rdt
+		from ex_board
+		order by bno desc
+	</select>
+
+	<insert id="insert" parameterType="Board">
+		insert into ex_board(bno,titl,cont,rdt)
+		values(#{no},#{title},#{content},now())
+	</insert>
 </mapper>
 
 
