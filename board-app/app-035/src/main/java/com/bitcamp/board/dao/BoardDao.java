@@ -1,8 +1,9 @@
 package com.bitcamp.board.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,20 +22,17 @@ public class BoardDao {
   }
 
   public void load() throws Exception {
-    try (BufferedReader in = new BufferedReader(new FileReader(filename))) {
-      String str;
-      while ((str = in.readLine()) != null) {
-
-        String[] values = str.split(",");
-
+    try (DataInputStream in = new DataInputStream(new FileInputStream(filename))) {
+      int size = in.readInt();
+      for (int i = 0; i < size; i++) {
         Board board = new Board();
-        board.no = Integer.parseInt(values[0]);
-        board.title = values[1];
-        board.content = values[2];
-        board.writer = values[3];
-        board.password = values[4];
-        board.viewCount = Integer.parseInt(values[5]);
-        board.createdDate = Long.parseLong(values[6]);
+        board.no = in.readInt();
+        board.title = in.readUTF();
+        board.content = in.readUTF();
+        board.writer = in.readUTF();
+        board.password = in.readUTF();
+        board.viewCount = in.readInt();
+        board.createdDate = in.readLong();
 
         list.add(board);
         boardNo = board.no;
@@ -43,16 +41,16 @@ public class BoardDao {
   }
 
   public void save() throws Exception {
-    try (FileWriter out = new FileWriter(filename)) {
+    try (DataOutputStream out = new DataOutputStream(new FileOutputStream(filename))) {
+      out.writeInt(list.size());
       for (Board board : list) {
-        out.write(String.format("%d,%s,%s,%s,%s,%d,%d\n",
-            board.no,
-            board.title,
-            board.content,
-            board.writer,
-            board.password,
-            board.viewCount,
-            board.createdDate));
+        out.writeInt(board.no);
+        out.writeUTF(board.title);
+        out.writeUTF(board.content);
+        out.writeUTF(board.writer);
+        out.writeUTF(board.password);
+        out.writeInt(board.viewCount);
+        out.writeLong(board.createdDate);
       }
     }
   }

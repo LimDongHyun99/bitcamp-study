@@ -1,8 +1,9 @@
 package com.bitcamp.board.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,35 +21,23 @@ public class MemberDao {
   }
 
   public void load() throws Exception {
-    try (BufferedReader in = new BufferedReader(new FileReader(filename))) {
-      String str;
-      while ((str = in.readLine()) != null) {
-
-        String[] values = str.split(",");
-
-        Member member = new Member();
-        member.no = Integer.parseInt(values[0]);
-        member.name = values[1];
-        member.email = values[2];
-        member.password = values[3];
-        member.createdDate = Long.parseLong(values[4]);
-
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+      int size = in.readInt();
+      for (int i = 0; i < size; i++) {
+        Member member = (Member) in.readObject();
         list.add(member);
+        //        System.out.println("============>");
       }
-    }
+    } // try () ==> try 블록을 벗어나기 전에 in.close()가 자동으로 실행된다.
   }
 
   public void save() throws Exception {
-    try (FileWriter out = new FileWriter(filename)) {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+      out.writeInt(list.size());
       for (Member member : list) {
-        out.write(String.format("%d,%s,%s,%s,%d\n",
-            member.no,
-            member.name,
-            member.email,
-            member.password,
-            member.createdDate));
+        out.writeObject(member);
       }
-    }
+    } // try () ==> try 블록을 벗어나기 전에 out.close()가 자동으로 실행된다.
   }
 
   public void insert(Member member) {
