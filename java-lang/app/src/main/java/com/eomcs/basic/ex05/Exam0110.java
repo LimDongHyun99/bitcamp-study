@@ -23,6 +23,7 @@ public class Exam0110 {
     // 값이 없는데 꺼내려 하면 EmptyStackException 예외가 발생한다.
     System.out.println(stack.pop());
   }
-
 }
+
+
 
