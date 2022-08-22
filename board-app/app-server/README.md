@@ -1,13 +1,7 @@
-# 042. Proxy 패턴을 이용한 네트워킹 코드 캡슐화
+# 044. 통신 방식을 Stateful에서 Stateless로 변경하기
 
 ## 작업 내용
 
-### 1단계 - BoardDao 대행자 클래스를 만든다.
+### 1단계 - 한 번 연결에 한 번의 요청만 처리한다.
 
-- com.bitcamp.board.dao.BoardDaoProxy 클래스 추가
-- com.bitcamp.board.dao.BoardDaoProxyTest 클래스 추가
-
-### 1단계 - MemberDao 대행자 클래스를 만든다.
-
-- com.bitcamp.board.dao.MemberDaoProxy 클래스 추가
-- com.bitcamp.board.dao.MemberDaoProxyTest 클래스 추가
+- com.bitcamp.board.ServerApp 클래스 변경
