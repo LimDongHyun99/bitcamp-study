@@ -21,8 +21,6 @@ public class Receiver4 {
     DataInputStream in = new DataInputStream(socket.getInputStream());
 
     System.out.println("클라이언트로부터 데이터 수신 중...");
-    System.out.println("클라이언트로부터 데이터 수신 중...");
-    System.out.println("클라이언트로부터 데이터 수신 중...");
 
     //1) 파일 크기 읽기
     long filesize = in.readLong();
@@ -50,5 +48,8 @@ public class Receiver4 {
   }
 
 }
+
+
+
 
 
