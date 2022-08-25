@@ -10,8 +10,7 @@ import java.util.Scanner;
 public class CalculatorClient {
   public static void main(String[] args) {
 
-    try (
-        Scanner keyboardScanner = new Scanner(System.in);
+    try (Scanner keyboardScanner = new Scanner(System.in);
         Socket socket = new Socket("localhost", 8888);
         PrintStream out = new PrintStream(socket.getOutputStream());
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {

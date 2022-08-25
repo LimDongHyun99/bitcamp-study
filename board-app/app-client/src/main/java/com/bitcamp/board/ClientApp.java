@@ -42,8 +42,8 @@ public class ClientApp {
       System.out.println();
 
       try {
-        int mainMenuNo =
-            Prompt.inputInt(String.format("메뉴를 선택하세요[1..%d](0: 종료) ", handlers.size()));
+        int mainMenuNo = Prompt.inputInt(String.format(
+            "메뉴를 선택하세요[1..%d](0: 종료) ", handlers.size()));
 
         if (mainMenuNo < 0 || mainMenuNo > menus.length) {
           System.out.println("메뉴 번호가 옳지 않습니다!");
