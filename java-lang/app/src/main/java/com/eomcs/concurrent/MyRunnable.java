@@ -1,10 +1,10 @@
 package com.eomcs.concurrent;
 
-public class MyThread extends Thread {
+public class MyRunnable implements Runnable {
 
   int count;
 
-  public MyThread(int count) {
+  public MyRunnable(int count) {
     this.count = count;
   }
 
