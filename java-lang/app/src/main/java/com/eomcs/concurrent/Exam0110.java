@@ -11,6 +11,8 @@ public class Exam0110 {
       System.out.println("==> " + i);
     }
 
+    MyThread t = 
+
     for (int i = 0; i < count; i++) {
       System.out.println(">>> " + i);
     }
