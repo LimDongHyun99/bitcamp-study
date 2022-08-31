@@ -13,6 +13,8 @@ public class Exam0120 {
 
     My obj = new My();
 
+    My obj2 = new My();
+
     // Object에서 상속 받은 메서드 
     //
     // 1) toString()
@@ -44,10 +46,5 @@ public class Exam0120 {
   }
 
 }
-
-
-
-
-
 
 
