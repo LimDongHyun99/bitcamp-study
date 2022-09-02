@@ -37,11 +37,6 @@ public class Exam0110 {
     }
   }
 
-  private static void print(ArrayBlockingQueue queue) {
-    // TODO Auto-generated method stub
-
-  }
-
   static void print(ArrayBlockingQueue queue) {
     Object[] arr = queue.toArray();
     for (int i = 0; i < arr.length; i++) {

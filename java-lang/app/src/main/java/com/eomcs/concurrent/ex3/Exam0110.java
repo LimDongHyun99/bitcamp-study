@@ -4,6 +4,7 @@ package com.eomcs.concurrent.ex3;
 public class Exam0110 {
 
   public static void main(String[] args) {
+
     // 1) Thread 클래스를 상속 받아 정의하기
     // => 구현하기 편하다.
     // => 그런데 다중 상속이 불가능하기 때문에 다른 클래스를 상속 받을 수 없다.
@@ -25,10 +26,6 @@ public class Exam0110 {
     // => Thread의 서브 클래스는 그냥 인스턴스를 만들어 start()를 호출한다.
     MyThread t = new MyThread();
     t.start(); // 실행 흐름을 분리한 후 즉시 리턴한다. 비동기로 동작한다.
-
-    MyThread a = new MyThread();
-    a.start();
-
 
     // "main" 스레드는 MyThread와 상관없이 병행하여 실행한다.
     for (int i = 0; i < 1000; i++) {

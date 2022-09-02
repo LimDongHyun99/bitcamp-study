@@ -5,7 +5,7 @@ package com.eomcs.lang.ex07;
 public class Exam0440 {
 
   static int m1(int value) {
-    int r1 = m2(value); // value들은 서로 다른 변수이다.
+    int r1 = m2(value);
     int r2 = m3(value);
     return r1 + r2;
   }

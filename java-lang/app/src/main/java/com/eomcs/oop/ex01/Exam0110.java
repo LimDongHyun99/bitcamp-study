@@ -1,6 +1,7 @@
 package com.eomcs.oop.ex01;
 
-
+// # 클래스 사용 : 1) 일반 변수 사용
+//
 public class Exam0110 {
   public static void main(String[] args) {
     // 낱개의 변수를 사용하여 한 사람의 성적 정보를 저장하라!
@@ -48,7 +49,5 @@ public class Exam0110 {
     aver = (float) sum / 3;
 
     System.out.printf("%s: %d, %d, %d, %d, %.1f\n", name, kor, eng, math, sum, aver);
-
-
   }
 }

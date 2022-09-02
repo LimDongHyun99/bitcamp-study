@@ -24,7 +24,6 @@ public class Score2 {
   }
 
   public void compute() {
-
     this.sum = this.kor + this.eng + this.math;
     this.aver = (float) this.sum / 3;
   }

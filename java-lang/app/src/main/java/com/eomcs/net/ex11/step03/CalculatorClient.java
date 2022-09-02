@@ -19,6 +19,7 @@ public class CalculatorClient {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
   }
 
   static void readResponse(BufferedReader in) throws Exception {

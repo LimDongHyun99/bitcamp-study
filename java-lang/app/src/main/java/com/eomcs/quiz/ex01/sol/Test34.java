@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 문자열이 주어질 때, 지정된 인덱스로부터 지정된 개수의 문자열을 추출하라!
@@ -32,7 +32,7 @@ with length equal to length
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n): 추출할 문자열의 길이
 //
 public class Test34 {
 
@@ -41,13 +41,11 @@ public class Test34 {
   }
 
   static String mySubstringByLength(String inputString, int start, int length) {
-    // 이 메서드를 완성하시오!
-    return "";
+    char[] result = new char[length];
+    int k = 0;
+    for (int i = start; i < start + length; i++) {
+      result[k++] = inputString.charAt(i);
+    }
+    return new String(result);
   }
 }
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 10진수의 자릿수의 길이가 주어질 때 
@@ -26,7 +26,7 @@ integer's length, positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n): n은 10진수의 자릿수이다.
 //
 public class Test38 {
 
@@ -37,7 +37,17 @@ public class Test38 {
   }
 
   static int smallestNumber(int n) {
-    // 이 메서드를 완성하시오!
-    return 0;
+
+    if (n == 1) {
+      return 0;
+    }
+
+    int res = 1;
+
+    for (int i = 1; i < n; i++) {
+      res *= 10;
+    }
+
+    return res;
   }
 }

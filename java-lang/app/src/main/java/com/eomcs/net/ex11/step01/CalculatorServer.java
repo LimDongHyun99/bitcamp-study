@@ -22,7 +22,7 @@ public class CalculatorServer {
         out.println("예) 23 + 7");
         out.flush();
       }
-      System.out.println();
+
     } catch (Exception e) {
       e.printStackTrace();
     }

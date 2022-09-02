@@ -17,5 +17,3 @@ public class Score {
   public int sum;
   public float aver;
 }
-
-

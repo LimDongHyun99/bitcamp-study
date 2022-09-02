@@ -5,15 +5,13 @@ package com.eomcs.basic.ex01;
 
 public class Exam0120 {
 
-  static class My extends Object {
+  static class My {
 
   }
 
   public static void main(String[] args) {
 
     My obj = new My();
-
-    My obj2 = new My();
 
     // Object에서 상속 받은 메서드 
     //
@@ -46,5 +44,10 @@ public class Exam0120 {
   }
 
 }
+
+
+
+
+
 
 

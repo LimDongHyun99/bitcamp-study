@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 테니스 경기에서 세트의 종료 조건은 
@@ -35,7 +35,7 @@ true if score1 : score2 represents a possible score for an ended set, false othe
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(1): 시간 복잡도는 일정하다.
 //
 public class Test32 {
 
@@ -43,18 +43,17 @@ public class Test32 {
     System.out.println(tennisSet(3, 6) == true);
     System.out.println(tennisSet(8, 5) == false);
     System.out.println(tennisSet(6, 5) == false);
-    System.out.println(tennisSet(6, 7) == true);
   }
 
   static boolean tennisSet(int score1, int score2) {
-    // 이 메서드를 완성하시오!
+    if (score1 < score2) {
+      int tmp = score1;
+      score1 = score2;
+      score2 = tmp;
+    }
+    if (score1 == 6 && score2 < 5 || score1 == 7 && score2 < 7) {
+      return true;
+    }
     return false;
   }
 }
-
-
-
-
-
-
-

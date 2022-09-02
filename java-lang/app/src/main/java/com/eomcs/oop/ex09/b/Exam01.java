@@ -25,6 +25,7 @@ interface MyInterface {
   //  private void m5(); // 컴파일 오류!
   //  protected void m6(); // 컴파일 오류!
   void m7(); // 이건 (default) 아니라, public 이 생략된 것이다.
+
 }
 
 // 2) 인터페이스 구현

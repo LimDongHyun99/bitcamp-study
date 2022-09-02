@@ -12,8 +12,7 @@ public class Exam0210 {
   public static void main(String[] args) throws Exception {
 
     // => URL 주소를 준비한다.
-    URL url =
-        new URL("https://isplus.com/data/photo/202208/24/b4f052ca-040a-4754-a455-5c613034dd3f.jpg");
+    URL url = new URL("https://sports.news.naver.com/index");
 
     // => URL 정보를 가지고 HTTP 요청을 수행할 객체를 얻는다.
     URLConnection con = url.openConnection();

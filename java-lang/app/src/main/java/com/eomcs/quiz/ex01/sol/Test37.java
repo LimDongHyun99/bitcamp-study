@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 산술식 A # B = C 가 있을 때,
@@ -28,7 +28,7 @@ Consider an arithmetic expression of the form A#B=C.
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(1): 시간 복잡도는 일정하다.
 //
 public class Test37 {
 
@@ -38,7 +38,10 @@ public class Test37 {
   }
 
   static boolean arithmeticExpression(int A, int B, int C) {
-    // 이 메서드를 완성하시오!
+
+    if (A + B == C || A * B == C || A / B == C || A - B == C) {
+      return true;
+    }
     return false;
   }
 }

@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 배열이 주어질 때 다음 조건을 만족하는 경우의 수를 찾으시오.
@@ -24,7 +24,7 @@ Two elements of the array of integers form an inversion if array[index1] > array
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n!): n은 배열의 개수이다.
 //
 public class Test36 {
 
@@ -33,8 +33,16 @@ public class Test36 {
   }
 
   static int countInversionsNaive(int[] inputArray) {
+
     int result = 0;
-    // 이 메서드를 완성하시오!
+
+    for (int i = 0; i < inputArray.length; i++) {
+      for (int j = i + 1; j < inputArray.length; j++) {
+        if (inputArray[i] > inputArray[j]) {
+          result++;
+        }
+      }
+    }
     return result;
   }
 }

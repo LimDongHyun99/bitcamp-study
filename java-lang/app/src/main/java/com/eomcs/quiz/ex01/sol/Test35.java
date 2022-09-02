@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 1에서 n까지의 세제곱의 합을 구하라!
@@ -22,7 +22,7 @@ positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n): 1에서 n까지 반복 횟수
 //
 public class Test35 {
 
@@ -31,13 +31,10 @@ public class Test35 {
   }
 
   static int sumOfCubes(int n) {
-    // 이 메서드를 완성하시오!
-    return 0;
+    int result = 0;
+    for (int i = 1; i <= n; i++) {
+      result += i * i * i;
+    }
+    return result;
   }
 }
-
-
-
-
-
-

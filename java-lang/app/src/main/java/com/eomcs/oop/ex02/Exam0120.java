@@ -8,7 +8,6 @@ public class Exam0120 {
 
   // 여러 메서드에서 공유하려면 클래스 멤버로 만들어야 한다.
   // - 특히 스태틱 멤버끼리 공유하려면 같은 스태틱 멤버로 만들어야 한다.
-
   static class Score {
     String name; // 변수 또는 필드
     int kor;
@@ -18,9 +17,7 @@ public class Exam0120 {
     float aver;
   }
 
-
   public static void main(String[] args) {
-
 
     Score s1 = new Score();
 

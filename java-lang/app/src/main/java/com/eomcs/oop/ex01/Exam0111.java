@@ -35,7 +35,6 @@ public class Exam0111 {
     math = 65;
 
     printScore(name, kor, eng, math);
-
   }
 
   static void printScore(String name, int kor, int eng, int math) {

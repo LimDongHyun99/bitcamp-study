@@ -25,10 +25,5 @@ public class Exam0320 {
   }
 
   public static void main(String[] args) {}
-  try {
-    m(2);
-  } catch (Exception e) {
-    // TODO Auto-generated catch block
-    e.printStackTrace();
-  }
+
 }

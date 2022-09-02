@@ -1,4 +1,4 @@
-package com.eomcs.quiz.ex01;
+package com.eomcs.quiz.ex01.sol;
 // copyright by codefights.com
 // 
 // 사칙연산(+, -, *, /)만 이용하여 나눈 나머지를 구하라!
@@ -25,7 +25,7 @@ a positive integer
  */
 //
 // [시간 복잡도]
-// - ?
+// - O(n): 값을 나누는수로 뺀 회수
 //
 public class Test33 {
 
@@ -34,7 +34,9 @@ public class Test33 {
   }
 
   static int findTheRemainder(int a, int b) {
-    // 이 메서드를 완성하시오!
-    return 0;
+    while (a >= b) {
+      a -= b;
+    }
+    return a;
   }
 }

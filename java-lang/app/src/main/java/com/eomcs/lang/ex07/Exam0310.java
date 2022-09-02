@@ -6,9 +6,9 @@ public class Exam0310 {
 
   static void swap(int a, int b) {
     System.out.printf("swap(): a=%d, b=%d\n", a, b);
-    int temp = a; // a 100
-    a = b; // b 200
-    b = temp; //  temp는 현재 100
+    int temp = a;
+    a = b;
+    b = temp;
     System.out.printf("swap(): a=%d, b=%d\n", a, b);
   }
 
@@ -20,7 +20,7 @@ public class Exam0310 {
     // => 그래서 "call by value"라 부른다.
     // => 비록 swap()에서 a와 b라는 이름의 변수가 있지만,
     //    이 변수는 main()에 있는 변수와 다른 변수이다.
-    swap(a, b); // a,b 변수를 넘기는 것이 아니라, 각 값인 100, 200 을 넘긴다. 
+    swap(a, b);
     System.out.printf("main(): a=%d, b=%d\n", a, b);
   }
 }

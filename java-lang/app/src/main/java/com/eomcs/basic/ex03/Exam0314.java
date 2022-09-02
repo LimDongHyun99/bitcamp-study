@@ -91,8 +91,16 @@ public class Exam0314 {
     list.add(m3);
 
     for (Member m : list) {
-      System.out.printf("이름: %s, 나이: %d\n", m.name, m.ag3);
+      System.out.printf("이름: %s, 나이: %d\n", m.name, m.age);
     }
+
+    // 위 반복문은 컴파일 될 때 다음 문장으로 변환된다.
+    //
+    //    Iterator<Member> iterator = list.iterator();
+    //    while (iterator.hasNext()) {
+    //      Member m = iterator.next();
+    //      System.out.printf("이름: %s, 나이: %d\n", m.name, m.age);
+    //    }
   }
 }
 
