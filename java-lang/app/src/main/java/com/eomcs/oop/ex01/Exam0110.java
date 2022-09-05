@@ -1,4 +1,4 @@
-package src.main.java.com.eomcs.oop.ex01;
+package com.eomcs.oop.ex01;
 
 // # 클래스 사용 : 1) 일반 변수 사용
 //

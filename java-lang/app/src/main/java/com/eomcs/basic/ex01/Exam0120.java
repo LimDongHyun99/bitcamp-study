@@ -14,10 +14,12 @@ public class Exam0120 {
     My obj = new My();
 
     // Object에서 상속 받은 메서드 
+    //
     // 1) toString()
     //    - 클래스 정보를 간단히 출력한다.
     //    - 패키지명.클래스명@16진수해시값
     //    - 예) ch15.My1@1e81f4dc
+    //
     System.out.println(obj.toString());
 
     // println()에 넘겨주는 값이 String 타입이 아니라면
