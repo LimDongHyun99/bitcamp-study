@@ -21,6 +21,7 @@ public class Exam0320 {
     }
   }
 
+
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
 
@@ -43,19 +44,12 @@ public class Exam0320 {
     s2.compute(); // 이번에는 s2에 들어 있는 주소를 compute()에 전달한다.
 
 
-    System.out.printf("%s, %d, %d, %d, %d, %.1f\n",
-        s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.average);
+    System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s1.name, s1.kor, s1.eng, s1.math, s1.sum,
+        s1.average);
 
-    System.out.printf("%s, %d, %d, %d, %d, %.1f\n",
-        s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.average);
+    System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s2.name, s2.kor, s2.eng, s2.math, s2.sum,
+        s2.average);
   }
 }
-
-
-
-
-
-
-
 
 

@@ -22,6 +22,8 @@ public class Exam0110 {
       System.out.print("내용? ");
       contents = keyScan.nextLine();
 
+
+      title = keyScan.nextLine();
       // 사용자로부터 첨부파일 입력 받기
       while (true) {
         System.out.print("첨부파일:(완료는 그냥 엔터!) ");
@@ -37,12 +39,12 @@ public class Exam0110 {
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
 
         // 게시글 입력 처리 객체
-        PreparedStatement boardStmt = con.prepareStatement(
-            "insert into x_board(title,contents) values(?,?)");
+        PreparedStatement boardStmt =
+            con.prepareStatement("insert into x_board(title,contents) values(?,?)");
 
         // 첨부파일 입력 처리 객체
-        PreparedStatement fileStmt = con.prepareStatement(
-            "insert into x_board_file(file_path,board_id) values(?,?)")) {
+        PreparedStatement fileStmt =
+            con.prepareStatement("insert into x_board_file(file_path,board_id) values(?,?)")) {
 
       // 게시글 입력
       boardStmt.setString(1, title);

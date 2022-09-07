@@ -1,4 +1,4 @@
-// 인스턴스와 인스턴스 변수, 인스턴스 메서드 
+// 인스턴스와 인스턴스 변수, 인스턴스 메서드
 package com.eomcs.oop.ex03;
 
 public class Exam0230 {
@@ -12,6 +12,7 @@ public class Exam0230 {
     public void plus(int value) {
       this.result += value;
     }
+
     public void minus(int value) {
       this.result -= value;
     }
@@ -34,10 +35,5 @@ public class Exam0230 {
     c2.plus(30);
   }
 }
-
-
-
-
-
 
 
