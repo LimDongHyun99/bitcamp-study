@@ -4,12 +4,12 @@ import com.bitcamp.board.ClientApp;
 import com.bitcamp.util.Prompt;
 
 // Handler 규격에 맞춰 서브 클래스에게 물려줄 공통 필드나 메서드를 구현한다.
-// 
+//
 public abstract class AbstractHandler implements Handler {
 
   // 핸들러가 사용할 메뉴 목록을 담을 배열을 준비한다.
   // => 메뉴 목록은 생성자를 통해 초기화시킨다.
-  //
+  // 
   private String[] menus;
 
   // 반드시 메뉴 목록을 초기화시키도록 강제하기 위해 
@@ -54,8 +54,7 @@ public abstract class AbstractHandler implements Handler {
       printBlankLine();
 
       try {
-        int menuNo = Prompt.inputInt(String.format(
-            "메뉴를 선택하세요[1..%d](0: 이전) ", menus.length));
+        int menuNo = Prompt.inputInt(String.format("메뉴를 선택하세요[1..%d](0: 이전) ", menus.length));
 
         if (menuNo < 0 || menuNo > menus.length) {
           System.out.println("메뉴 번호가 옳지 않습니다!");
@@ -93,9 +92,5 @@ public abstract class AbstractHandler implements Handler {
   // => 서브 클래스에게 구현을 강제하기 위해 추상 메서드로 선언한다.
   public abstract void service(int menuNo);
 }
-
-
-
-
 
 

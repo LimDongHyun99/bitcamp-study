@@ -1,6 +1,7 @@
 package com.bitcamp.board.dao;
 
 import com.bitcamp.board.domain.Board;
+import com.bitcamp.util.Iterator;
 import com.bitcamp.util.LinkedList;
 import com.bitcamp.util.List;
 
@@ -38,7 +39,18 @@ public class BoardDao {
   }
 
   public Board[] findAll() {
-    return list.toArray(new Board[0]);
+
+    // 목록에서 값을 꺼내는 일을 할 객체를 준비한다.
+    Iterator<Board> iterator = list.iterator();
+
+    // 역순으로 정렬하여 리턴한다.
+    Board[] arr = new Board[list.size()];
+
+    int index = list.size() - 1;
+    while (iterator.hasNext()) {
+      arr[index--] = iterator.next();
+    }
+    return arr;
   }
 
   private int nextNo() {

@@ -18,19 +18,20 @@ public class MariaDBBoardDao implements BoardDao {
 
   @Override
   public int insert(Board board) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "insert into app_board(title,cont,mno) values(?,?,?)")) {
-      pstmt.setString(1, board.title);
-      pstmt.setString(2, board.content);
-      pstmt.setInt(3, board.memberNo);
-      return pstmt.executeUpdate();
+    try (PreparedStatement pst =
+        con.prepareStatement("insert into app_board(title,cont,mno) values(?,?,?)")) {
+      pst.setString(1, board.title);
+      pst.setString(2, board.content);
+      pst.setInt(3, board.memberNo);
+      return pst.executeUpdate();
     }
   }
 
   @Override
   public Board findByNo(int no) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select bno,title,cont,mno,cdt,vw_cnt from app_board where bno=" + no);
+    try (
+        PreparedStatement pstmt = con.prepareStatement(
+            "select bno,title,cont,mno,cdt,vw_cnt from app_board where bno=" + no);
         ResultSet rs = pstmt.executeQuery()) {
 
       if (!rs.next()) {
@@ -51,8 +52,8 @@ public class MariaDBBoardDao implements BoardDao {
 
   @Override
   public int update(Board board) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "update app_board set title=?, cont=? where bno=?")) {
+    try (PreparedStatement pstmt =
+        con.prepareStatement("update app_board set title=?, cont=? where bno=?")) {
 
       pstmt.setString(1, board.title);
       pstmt.setString(2, board.content);
@@ -73,8 +74,9 @@ public class MariaDBBoardDao implements BoardDao {
 
   @Override
   public List<Board> findAll() throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select bno,title,mno,cdt,vw_cnt from app_board");
+    try (
+        PreparedStatement pstmt =
+            con.prepareStatement("select bno,title,mno,cdt,vw_cnt from app_board");
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Board> list = new ArrayList<>();
@@ -94,17 +96,3 @@ public class MariaDBBoardDao implements BoardDao {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
