@@ -26,11 +26,21 @@ public class BoardHandler extends AbstractHandler {
   @Override
   public void service(int menuNo) {
     switch (menuNo) {
-      case 1: this.onList(); break;
-      case 2: this.onDetail(); break;
-      case 3: this.onInput(); break;
-      case 4: this.onDelete(); break;
-      case 5: this.onUpdate(); break;
+      case 1:
+        this.onList();
+        break;
+      case 2:
+        this.onDetail();
+        break;
+      case 3:
+        this.onInput();
+        break;
+      case 4:
+        this.onDelete();
+        break;
+      case 5:
+        this.onUpdate();
+        break;
     }
   }
 
@@ -43,9 +53,9 @@ public class BoardHandler extends AbstractHandler {
 
     for (Board board : boards) {
       Date date = new Date(board.createdDate);
-      String dateStr = formatter.format(date); 
-      System.out.printf("%d\t%s\t%d\t%s\t%s\n",
-          board.no, board.title, board.viewCount, board.writer, dateStr);
+      String dateStr = formatter.format(date);
+      System.out.printf("%d\t%s\t%d\t%s\t%s\n", board.no, board.title, board.viewCount,
+          board.writer, dateStr);
     }
 
   }
@@ -77,7 +87,6 @@ public class BoardHandler extends AbstractHandler {
     System.out.printf("작성자: %s\n", board.writer);
     Date date = new Date(board.createdDate);
     System.out.printf("등록일: %tY-%1$tm-%1$td %1$tH:%1$tM\n", date);
-
   }
 
   private void onInput() {
@@ -144,7 +153,5 @@ public class BoardHandler extends AbstractHandler {
     }
   }
 }
-
-
 
 
