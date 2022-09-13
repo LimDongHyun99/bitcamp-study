@@ -18,8 +18,8 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int insert(Member member) throws Exception {
-    try (PreparedStatement pstmt =
-        con.prepareStatement("insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
+    try (PreparedStatement pstmt = con.prepareStatement(
+        "insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
 
       pstmt.setString(1, member.name);
       pstmt.setString(2, member.email);
@@ -32,9 +32,8 @@ public class MariaDBMemberDao implements MemberDao {
   @Override
   public Member findByNo(int no) throws Exception {
 
-    try (
-        PreparedStatement pstmt =
-            con.prepareStatement("select mno,name,email,cdt from app_member where mno=" + no);
+    try (PreparedStatement pstmt = con.prepareStatement(
+        "select mno,name,email,cdt from app_member where mno=" + no);
         ResultSet rs = pstmt.executeQuery()) {
 
       if (!rs.next()) {
@@ -52,8 +51,8 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int update(Member member) throws Exception {
-    try (PreparedStatement pstmt = con
-        .prepareStatement("update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
+    try (PreparedStatement pstmt = con.prepareStatement(
+        "update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
 
       pstmt.setString(1, member.name);
       pstmt.setString(2, member.email);
@@ -69,6 +68,7 @@ public class MariaDBMemberDao implements MemberDao {
     try (PreparedStatement pstmt1 = con.prepareStatement("delete from app_board where mno=?");
         PreparedStatement pstmt2 = con.prepareStatement("delete from app_member2 where mno=?")) {
 
+      // 커넥션 객체를 수동 커밋 상태로 설정한다.
       con.setAutoCommit(false);
 
       // 회원이 작성한 게시글을 삭제한다.
@@ -79,26 +79,29 @@ public class MariaDBMemberDao implements MemberDao {
       pstmt2.setInt(1, no);
       int count = pstmt2.executeUpdate();
 
-      // 현재까지 작업한 데이터 변경 결과를 실제 테이블에 적용해달라고 요청한다. 
+      // 현재까지 작업한 데이터 변경 결과를 실제 테이블에 적용해 달라고 요청한다.
       con.commit();
 
       return count;
 
     } catch (Exception e) {
       // 예외가 발생하면 마지막 커밋 상태로 돌린다.
-      // => 임시 데이터 베이스에 보관된 이전 작업 결과를 모두 취소한다.
+      // => 임시 데이터베이스에 보관된 이전 작업 결과를 모두 취소한다.
       con.rollback();
+
+      // 예외 발생 사실을 호출자에게 전달한다.
       throw e;
 
     } finally {
-      // 삭제 작업 후 자동 커밋 상태로 전환한다. 
+      // 삭제 작업 후 자동 커밋 상태로 전환한다.
       con.setAutoCommit(true);
     }
   }
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement("select mno,name,email from app_member");
+    try (PreparedStatement pstmt = con.prepareStatement(
+        "select mno,name,email from app_member");
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Member> list = new ArrayList<>();
@@ -116,5 +119,17 @@ public class MariaDBMemberDao implements MemberDao {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

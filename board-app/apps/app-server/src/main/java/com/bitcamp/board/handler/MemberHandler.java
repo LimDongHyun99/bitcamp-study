@@ -23,21 +23,11 @@ public class MemberHandler extends AbstractHandler {
   public void service(int menuNo) {
     try {
       switch (menuNo) {
-        case 1:
-          this.onList();
-          break;
-        case 2:
-          this.onDetail();
-          break;
-        case 3:
-          this.onInput();
-          break;
-        case 4:
-          this.onDelete();
-          break;
-        case 5:
-          this.onUpdate();
-          break;
+        case 1: this.onList(); break;
+        case 2: this.onDetail(); break;
+        case 3: this.onInput(); break;
+        case 4: this.onDelete(); break;
+        case 5: this.onUpdate(); break;
       }
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -50,7 +40,8 @@ public class MemberHandler extends AbstractHandler {
     System.out.println("번호\t이름\t이메일");
 
     for (Member member : members) {
-      System.out.printf("%d\t%s\t%s\n", member.no, member.name, member.email);
+      System.out.printf("%d\t%s\t%s\n",
+          member.no, member.name, member.email);
     }
   }
 
@@ -118,4 +109,7 @@ public class MemberHandler extends AbstractHandler {
     }
   }
 }
+
+
+
 
