@@ -17,6 +17,8 @@ public class Test01 {
     b.createdDate = System.currentTimeMillis();
 
     // object --> JSON 문자열
+
+    
     Gson gson = new Gson();
 
     String json = gson.toJson(b);
