@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.net.URLDecoder;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,25 +17,18 @@ import com.bitcamp.servlet.Servlet;
 import com.bitcamp.servlet.annotation.Repository;
 import com.bitcamp.servlet.annotation.WebServlet;
 
-// 1) 기본 웹 서버 만들기
-// 2) 한글 콘텐트를 출력하기
-// 3) HTML 콘텐트를 출력하기
-// 4) 메인 화면을 출력하는 요청처리 객체를 분리하기
-// 5) 요청 자원의 경로를 구분하여 처리하기
-// 6) 게시글 요청 처리하기
-// 7) URL 디코딩 처리
-// 8) 회원 요청 처리하기
-//
 public class ApplicationContainer {
 
-  // 객체(DAO, 서블릿)를 보관할 맵을 준비
-  public Map<String, Object> objMap = new HashMap<>();
+  //객체(DAO, 서블릿)을 보관할 맵을 준비 
+  Map<String, Object> objMap = new HashMap<>();
   Reflections reflections;
   ErrorHandler errorHandler = new ErrorHandler();
 
-
   public ApplicationContainer(String packageName) throws Exception {
     reflections = new Reflections(packageName);
+
+    Connection con =
+        DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
 
     // DAO 객체를 찾아 맵에 보관한다.
     Set<Class<?>> classes = reflections.get(TypesAnnotated.with(Repository.class).asClass());
@@ -44,45 +38,40 @@ public class ApplicationContainer {
       objMap.put(objName, constructor.newInstance(con));
     }
 
-
-    // 서블릿 객체를 찾아 맵에 보관한다. 
+    // 서블릿 객체를 찾아 맵에 보관한다.
     Set<Class<?>> servlets = reflections.get(TypesAnnotated.with(WebServlet.class).asClass());
     for (Class<?> servlet : servlets) {
       String servletPath = servlet.getAnnotation(WebServlet.class).value();
 
-      // 생성자의 파라미터의 타입을 알아내, 해당 객체를 주입한다.
       Constructor<?> constructor = servlet.getConstructors()[0];
       Parameter[] params = constructor.getParameters();
 
-      if (params.length == 0) { // 생성자의 파라미터가 없다면, 즉 기본 생성자라면 
+      if (params.length == 0) {
         objMap.put(servletPath, constructor.newInstance());
 
-      } else { // 생성자의 파라미터가 있다면, 
-        // 그 파라미터 타입과 일치하는 객체를 찾는다.
+      } else {
         Object argument = findObject(objMap, params[0].getType());
-        if (argument != null) { // 생성자의 파라미터 타입과 일치하는 객체를 찾았다면 
-          // 그 객체를 가지고 생성자를 호출하여 인스턴스를 생성한다.
+        if (argument != null) {
           objMap.put(servletPath, constructor.newInstance(argument));
         }
       }
     }
+  }
 
+  public void execute(String path, String query, PrintWriter out) throws Exception {
 
-  public void execute(String path, String quety, PrintWriter out) throws Exception {
-    // query string을 분석하여 파라미터 값을 맵에 저장한다. 
+    // query string을 분석하여 파라미터 값을 맵에 저장한다.
     Map<String, String> paramMap = new HashMap<>();
-    if (query != null && query.length() > 0) { // 예) no=1&title=aaaa&content=bbb
+    if (query != null && query.length() > 0) {
       String[] entries = query.split("&");
-      for (String entry : entries) { // 예) no=1
+      for (String entry : entries) {
         String[] kv = entry.split("=");
-        // 웹브라우저가 보낸 파라미터 값은 저장하기 전에 URL 디코딩 한다.
         paramMap.put(kv[0], URLDecoder.decode(kv[1], "UTF-8"));
       }
     }
     //    System.out.println(paramMap);
 
-
-    // 경로에 해당하는 서블릿 객체를 찾아 실행한다. 
+    // 경로에 해당하는 서블릿 객체를 찾아 실행한다.
     Servlet servlet = (Servlet) objMap.get(path);
 
     if (servlet != null) {
@@ -90,20 +79,20 @@ public class ApplicationContainer {
     } else {
       errorHandler.service(paramMap, out);
     }
-  }
+
+  } // execute()
+
 
   private static Object findObject(Map<String, Object> objMap, Class<?> type) {
-
-
     Collection<Object> values = objMap.values();
-
     for (Object value : values) {
       if (type.isInstance(value)) {
         return value;
       }
     }
-
     return null;
-
   }
+
 }
+
+
