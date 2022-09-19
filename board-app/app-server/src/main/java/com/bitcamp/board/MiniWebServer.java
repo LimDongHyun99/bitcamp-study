@@ -7,90 +7,20 @@ import java.io.StringWriter;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URLDecoder;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
-import org.reflections.Reflections;
-import org.reflections.Store;
-import org.reflections.util.QueryFunction;
-import com.bitcamp.board.dao.BoardDao;
-import com.bitcamp.board.dao.MariaDBBoardDao;
-import com.bitcamp.board.dao.MariaDBMemberDao;
-import com.bitcamp.board.dao.MemberDao;
-import com.bitcamp.board.handler.BoardAddHandler;
-import com.bitcamp.board.handler.BoardDeleteHandler;
-import com.bitcamp.board.handler.BoardDetailHandler;
-import com.bitcamp.board.handler.BoardFormHandler;
-import com.bitcamp.board.handler.BoardListHandler;
-import com.bitcamp.board.handler.BoardUpdateHandler;
-import com.bitcamp.board.handler.ErrorHandler;
-import com.bitcamp.board.handler.MemberAddHandler;
-import com.bitcamp.board.handler.MemberDeleteHandler;
-import com.bitcamp.board.handler.MemberDetailHandler;
-import com.bitcamp.board.handler.MemberFormHandler;
-import com.bitcamp.board.handler.MemberListHandler;
-import com.bitcamp.board.handler.MemberUpdateHandler;
-import com.bitcamp.board.handler.WelcomeHandler;
 import com.bitcamp.servlet.Servlet;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import static org.reflections.scanners.Scanner.*;
 
-// 1) 기본 웹 서버 만들기
-// 2) 한글 콘텐트를 출력하기
-// 3) HTML 콘텐트를 출력하기
-// 4) 메인 화면을 출력하는 요청처리 객체를 분리하기
-// 5) 요청 자원의 경로를 구분하여 처리하기
-// 6) 게시글 요청 처리하기
-// 7) URL 디코딩 처리
-// 8) 회원 요청 처리하기
-//
 public class MiniWebServer {
-  public static void main(String[] args) throws Exception {
-
-
-    // 지정된 패키지에서 @webServlet 애노테이션이 붙은 클래스를 모두 찾는다.
-    // 검색필터 1) WebServlet 애노테이션이 붙어 있는 클래스의 이름들을 모두 찾아라!
-    //    QueryFunction<Store, String> 검색필터1 = TypesAnnotated.with(WebServlet.class);
-
-    // 검색필터 2) 찾은 클래스 이름을 가지고 클래스 Method Area 영역에 로딩하여
-    //                      class 객체 목록을 리턴하라!
-    //    QueryFunction<Store, Class<?>> 검색필터2 = 검색필터1.asClass();
-
-    // 위의 두 검색 조건으로 클래스를 찾는다. 
-    //    for (Class<?> 서블릿클래스정보 : 서블릿클래스들) {
-    //      System.out.println(서블릿클래스정보.getName());
-
-  }
 
   public static void main2(String[] args) throws Exception {
-    Connection con =
-        DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
 
-    BoardDao boardDao = new MariaDBBoardDao(con);
-    MemberDao memberDao = new MariaDBMemberDao(con);
-
-    //서블릿 객체를 보관할 맵을 준비
-    Map<String, Servlet> servletMap = new HashMap<>();
-    servletMap.put("/", new WelcomeHandler());
-
-    // 클래스를 찾아주는 도구를 준비
-    Reflections reflections = new Reflections("com.bitcamp.board");
-    Set<Class<?>> servlets = reflections.get(TypesAnnotated.with(WebServlet.class).asClass());
-    for (Class<?> servlet : servlets) {
-      // 서블릿 클래스의 붙은 webServlet 애노테이션으로부터 path를 꺼낸다. 
-      String servletPath = servlet.getAnnotation(WebServlet.class).value();
-
-      // 생성자의 파라미터의 
-
-      webServlet anno = servlet.getnnotation(WebServlet.class);
-      Constructor<?> constructor = servlet.getConstructors()[0];
-    }
-
-    ErrorHandler errorHandler = new ErrorHandler();
+    // 애플리케이션 서버 객체를 준비한다. 
+    ApplicationContainer appContainer = new ApplicationContainer("com.bitcamp.board");
 
     class MyHttpHandler implements HttpHandler {
       @Override
@@ -99,12 +29,14 @@ public class MiniWebServer {
 
         URI requestUri = exchange.getRequestURI();
         String path = requestUri.getPath();
-        // String query = requestUri.getQuery(); // 디코딩을 제대로 수행하지 못한다!
-        String query = requestUri.getRawQuery(); // 디코딩 없이 query string을 그대로 리턴 받기!
+        String query = requestUri.getRawQuery();
         byte[] bytes = null;
 
         try (StringWriter stringWriter = new StringWriter();
             PrintWriter printWriter = new PrintWriter(stringWriter)) {
+
+          // 애플리케이션을 찾아 실행하는 것을 ApplicationContainer 에게 위임한다.
+          appContainer.execute(path, query, printWriter);
 
           Map<String, String> paramMap = new HashMap<>();
           if (query != null && query.length() > 0) { // 예) no=1&title=aaaa&content=bbb
@@ -117,8 +49,7 @@ public class MiniWebServer {
           }
           System.out.println(paramMap);
 
-          Servlet servlet = servletMap.get(path);
-
+          Servlet servlet = (Servlet) objMap.get(path);
 
           if (servlet != null) {
             servlet.service(paramMap, printWriter);
@@ -152,5 +83,3 @@ public class MiniWebServer {
 
     System.out.println("서버 시작!");
   }
-
-}

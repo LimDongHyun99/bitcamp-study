@@ -7,9 +7,9 @@ import java.io.PrintWriter;
 import java.util.Map;
 import com.bitcamp.board.dao.MemberDao;
 import com.bitcamp.servlet.Servlet;
-import com.bitcamp.servlet.annotation.webServlet;
+import com.bitcamp.servlet.annotation.WebServlet;
 
-@webServlet(value = "/member/delete")
+@WebServlet(value = "/member/delete")
 public class MemberDeleteHandler implements Servlet {
 
   private MemberDao memberDao;

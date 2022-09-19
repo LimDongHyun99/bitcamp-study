@@ -8,9 +8,9 @@ import java.util.Map;
 import com.bitcamp.board.dao.BoardDao;
 import com.bitcamp.board.domain.Board;
 import com.bitcamp.servlet.Servlet;
-import com.bitcamp.servlet.annotation.webServlet;
+import com.bitcamp.servlet.annotation.WebServlet;
 
-@webServlet(value = "/board/update")
+@WebServlet(value = "/board/update")
 public class BoardUpdateHandler implements Servlet {
 
   private BoardDao boardDao;

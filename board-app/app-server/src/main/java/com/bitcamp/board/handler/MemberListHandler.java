@@ -9,9 +9,9 @@ import java.util.Map;
 import com.bitcamp.board.dao.MemberDao;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.servlet.Servlet;
-import com.bitcamp.servlet.annotation.webServlet;
+import com.bitcamp.servlet.annotation.WebServlet;
 
-@webServlet(value = "/member/list")
+@WebServlet(value = "/member/list")
 public class MemberListHandler implements Servlet {
 
   private MemberDao memberDao;
