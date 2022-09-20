@@ -21,8 +21,8 @@ public class ApplicationContainer {
 
   //객체(DAO, 서블릿)을 보관할 맵을 준비 
   Map<String, Object> objMap = new HashMap<>();
-  Reflections reflections;
   ErrorHandler errorHandler = new ErrorHandler();
+  Reflections reflections;
 
   public ApplicationContainer(String packageName) throws Exception {
     reflections = new Reflections(packageName);
