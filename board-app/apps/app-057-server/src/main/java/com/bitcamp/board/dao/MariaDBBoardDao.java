@@ -11,7 +11,7 @@ public class MariaDBBoardDao implements BoardDao {
 
   Connection con;
 
-  //DAO가 사용할 의존 객체 Connection을 생성자의 파라미터로 받는다.
+  // DAO가 사용할 의존 객체 Connection을 생성자의 파라미터로 받는다.
   public MariaDBBoardDao(Connection con) {
     this.con = con;
   }
