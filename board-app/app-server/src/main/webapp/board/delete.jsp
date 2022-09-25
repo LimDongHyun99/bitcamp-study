@@ -14,7 +14,7 @@
 <h1>게시글 삭제-JSP</h1>
 <%
     try {
-      int no = Integer.parseInt(req.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("no"));
 
       if (boardDao.delete(no) == 0) {
         %>
@@ -24,10 +24,11 @@
     <p>해당 게시글을 삭제했습니다.</p>
 <%      }
     } catch (Exception e) {
-      %>  <p>실행 중 오류 발생!</p>
-<%    } %>
-<%
-  } %>
+      %>
+       <p>실행 중 오류 발생!</p>
+<%    
+  }
+  %>
 </body>
 </html>
 
