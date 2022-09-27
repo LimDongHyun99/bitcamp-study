@@ -18,8 +18,8 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int insert(Member member) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
+    try (PreparedStatement pstmt =
+        con.prepareStatement("insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
 
       pstmt.setString(1, member.name);
       pstmt.setString(2, member.email);
@@ -32,8 +32,9 @@ public class MariaDBMemberDao implements MemberDao {
   @Override
   public Member findByNo(int no) throws Exception {
 
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select mno,name,email,cdt from app_member where mno=" + no);
+    try (
+        PreparedStatement pstmt =
+            con.prepareStatement("select mno,name,email,cdt from app_member where mno=" + no);
         ResultSet rs = pstmt.executeQuery()) {
 
       if (!rs.next()) {
@@ -51,8 +52,8 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int update(Member member) throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
+    try (PreparedStatement pstmt = con
+        .prepareStatement("update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
 
       pstmt.setString(1, member.name);
       pstmt.setString(2, member.email);
@@ -100,8 +101,7 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (PreparedStatement pstmt = con.prepareStatement(
-        "select mno,name,email from app_member");
+    try (PreparedStatement pstmt = con.prepareStatement("select mno,name,email from app_member");
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Member> list = new ArrayList<>();
@@ -118,18 +118,29 @@ public class MariaDBMemberDao implements MemberDao {
       return list;
     }
   }
+
+  @Override
+  public Member findByEmailPassword(String email, String password) throws Exception {
+    try (PreparedStatement pstmt = con.prepareStatement(
+        "select mno,name,email,cdt from app_member where email=? and pwd=sha2(?,256)")) {
+
+      pstmt.setString(1, email);
+      pstmt.setString(2, password);
+
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        Member member = new Member();
+        member.no = rs.getInt("mno");
+        member.name = rs.getString("name");
+        member.email = rs.getString("email");
+        member.createdDate = rs.getDate("cdt");
+        return member;
+      }
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
