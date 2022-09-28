@@ -1,7 +1,7 @@
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,16 +25,15 @@ tr:hover {
       <th>작성자</th>
       <th>등록일</th>
     </tr>
-
-<c:forEach items='${boards}' var="board"> 
+<c:forEach items="${boards}" var="board">
     <tr>
       <td>${board.no}</td>
       <td><a href='detail?no=${board.no}'>${board.title}</a></td>
       <td>${board.viewCount}</td>
-      <td>${board.memberNo}</td>
+      <td>${board.writer.name}</td>
       <td>${board.createdDate}</td>
     </tr>
-    </c:forEach> 
+</c:forEach>
   </table>
   <p><a href='../'>메인</a></p>
 </body>
