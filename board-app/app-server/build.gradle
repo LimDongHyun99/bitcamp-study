@@ -23,7 +23,7 @@ dependencies {
     // JSTL 명세를 구현한 라이브러리
     implementation 'javax.servlet:jstl:1.2'
     
-    implementation 'commons-fileupload:commons-fileupload:1.4'
+    // implementation 'commons-fileupload:commons-fileupload:1.4'
 
     // implementation project(':app-common')
 
