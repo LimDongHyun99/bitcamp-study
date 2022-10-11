@@ -4,21 +4,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.stereotype.Repository;
 import com.bitcamp.board.domain.Member;
-import com.bitcamp.sql.DataSource;
 
+@Repository // DAO 역할을 수행하는 객체에 붙이는 애노테이션
 public class MariaDBMemberDao implements MemberDao {
 
   DataSource ds;
 
   public MariaDBMemberDao(DataSource ds) {
+    System.out.println("MariaDBMemberDao() 호출됨!");
     this.ds = ds;
   }
 
   @Override
   public int insert(Member member) throws Exception {
-    try (PreparedStatement pstmt = ds.getConnection().prepareStatement(
-        "insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
+    try (PreparedStatement pstmt = ds.getConnection()
+        .prepareStatement("insert into app_member(name,email,pwd) values(?,?,sha2(?,256))")) {
 
       pstmt.setString(1, member.getName());
       pstmt.setString(2, member.getEmail());
@@ -31,8 +34,9 @@ public class MariaDBMemberDao implements MemberDao {
   @Override
   public Member findByNo(int no) throws Exception {
 
-    try (PreparedStatement pstmt = ds.getConnection().prepareStatement(
-        "select mno,name,email,cdt from app_member where mno=" + no);
+    try (
+        PreparedStatement pstmt = ds.getConnection()
+            .prepareStatement("select mno,name,email,cdt from app_member where mno=" + no);
         ResultSet rs = pstmt.executeQuery()) {
 
       if (!rs.next()) {
@@ -50,8 +54,8 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int update(Member member) throws Exception {
-    try (PreparedStatement pstmt = ds.getConnection().prepareStatement(
-        "update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
+    try (PreparedStatement pstmt = ds.getConnection()
+        .prepareStatement("update app_member set name=?, email=?, pwd=sha2(?,256) where mno=?")) {
 
       pstmt.setString(1, member.getName());
       pstmt.setString(2, member.getEmail());
@@ -64,8 +68,11 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public int delete(int no) throws Exception {
-    try (PreparedStatement pstmt1 = ds.getConnection().prepareStatement("delete from app_board where mno=?");
-        PreparedStatement pstmt2 = ds.getConnection().prepareStatement("delete from app_member where mno=?")) {
+    try (
+        PreparedStatement pstmt1 =
+            ds.getConnection().prepareStatement("delete from app_board where mno=?");
+        PreparedStatement pstmt2 =
+            ds.getConnection().prepareStatement("delete from app_member where mno=?")) {
 
       // 커넥션 객체를 수동 커밋 상태로 설정한다.
       ds.getConnection().setAutoCommit(false);
@@ -99,8 +106,9 @@ public class MariaDBMemberDao implements MemberDao {
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (PreparedStatement pstmt = ds.getConnection().prepareStatement(
-        "select mno,name,email from app_member order by name");
+    try (
+        PreparedStatement pstmt = ds.getConnection()
+            .prepareStatement("select mno,name,email from app_member order by name");
         ResultSet rs = pstmt.executeQuery()) {
 
       ArrayList<Member> list = new ArrayList<>();
@@ -141,17 +149,5 @@ public class MariaDBMemberDao implements MemberDao {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
