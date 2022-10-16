@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@ComponentScan(value="com.bitcamp.board")
+@ComponentScan(value = "com.bitcamp.board")
 public class AppConfig {
 
   public AppConfig() {
@@ -24,7 +24,7 @@ public class AppConfig {
   // 이름을 지정하지 않으면 메서드 이름으로 보관한다.
   //  @Bean("transactionManager")
   @Bean
-  public PlatformTransactionManager transactionManager(DataSource ds) {
+  public PlatformTransdactionManager transactionManager(DataSource ds) {
     return new DataSourceTransactionManager(ds);
   }
 
@@ -42,7 +42,7 @@ public class AppConfig {
   // 도메인 객체로 받는 일을 할 도우미 객체를 등록한다.
   // 이 객체가 등록된 경우 multipart/form-data 를 도메인 객체로 받을 수 있다.
   @Bean
-  public MultipartResolver multipartResolver() {
+  public MultipartResolver Resolver() {
     return new StandardServletMultipartResolver();
   }
 
@@ -55,13 +55,6 @@ public class AppConfig {
     viewResolver.setSuffix(".jsp");
     return viewResolver;
   }
-
 }
-
-
-
-
-
-
 
 
