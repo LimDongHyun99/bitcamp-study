@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-
     // spring-webmvc 관련 라이브러리
-implementation ('org.springframework.boot:spring-boot-starter-web') {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-}
-    // undertow 서블릿 컨테이너
+    implementation ('org.springframework.boot:spring-boot-starter-web') {
+      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    
+    // Undertow 서블릿 컨테이너
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     
     // Thymeleaf 관련 라이브러리
@@ -23,7 +23,6 @@ implementation ('org.springframework.boot:spring-boot-starter-web') {
 
     // spring-jdbc 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    
     
     // mybatis-spring 관련 라이브러리
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
@@ -39,6 +38,7 @@ implementation ('org.springframework.boot:spring-boot-starter-web') {
     
     // 프레임워크나 라이브러리 등에서 출력하는 로그를 다루는 라이브러리
     //implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
+    
     
     //implementation project(':app-common')
 }
