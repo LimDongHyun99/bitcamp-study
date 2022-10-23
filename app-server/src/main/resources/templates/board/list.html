@@ -23,15 +23,15 @@ tr:hover {
     </tr>
 
     <tr data-th-each="board : ${boards}">
-      <td data-th-text="${board.no}">100</td>
+      <td data-th-text="${board.no}"></td>
       <td>
         <a href='detail?no=1'
           data-th-href="@{detail(no=${board.no})}"
-          data-th-text="${board.title == ''} ? '(제목없음)' : ${board.title}">제목</a>
+          data-th-text="${board.title == ''} ? '(제목없음)' : ${board.title}"></a>
       </td>
-      <td data-th-text="${board.viewCount}">17</td>
-      <td data-th-text="${board.writer.name}">홍길동</td>
-      <td data-th-text="${board.createdDate}">2022-1-1</td>
+      <td data-th-text="${board.viewCount}" ></td>
+      <td data-th-text="${board.writer.name}"></td>
+      <td data-th-text="${board.createdDate}"></td>
     </tr>
 
   </table>
