@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bitcamp.board.domain.Member;
 import com.bitcamp.board.service.MemberService;
 
-@Controller 
+@Controller
 @RequestMapping("/auth/")
 public class AuthController {
 
@@ -24,48 +24,41 @@ public class AuthController {
     this.memberService = memberService;
   }
 
-  @GetMapping("form") 
-  public String form(@CookieValue(name="email",defaultValue="") String email, Model model) throws Exception {
+  @GetMapping("form")
+  public String form(@CookieValue(name = "email", defaultValue = "") String email, Model model)
+      throws Exception {
     model.addAttribute("email", email);
     return "auth/form";
   }
 
-  @PostMapping("login") 
-  public ModelAndView login(
-      String email, 
-      String password, 
-      String saveEmail, 
-      HttpServletResponse response,
-      HttpSession session) throws Exception {
+  @PostMapping("login")
+  public ModelAndView login(String email, String password, String saveEmail,
+      HttpServletResponse response, HttpSession session) throws Exception {
 
     Member member = memberService.get(email, password);
 
     if (member != null) {
-      session.setAttribute("loginMember", member); 
+      session.setAttribute("loginMember", member);
     }
 
-    Cookie cookie = new Cookie("email", email); 
+    Cookie cookie = new Cookie("email", email);
     if (saveEmail == null) {
-      cookie.setMaxAge(0); 
+      cookie.setMaxAge(0);
     } else {
       cookie.setMaxAge(60 * 60 * 24 * 7); // 7일
     }
-    response.addCookie(cookie); 
+    response.addCookie(cookie);
 
     ModelAndView mv = new ModelAndView("auth/loginResult");
     mv.addObject("member", member);
     return mv;
   }
 
-  @GetMapping("logout") 
+  @GetMapping("logout")
   public String logout(HttpSession session) throws Exception {
-    session.invalidate(); 
-    return "redirect:../"; 
+    session.invalidate();
+    return "redirect:../";
   }
 }
-
-
-
-
 
 
