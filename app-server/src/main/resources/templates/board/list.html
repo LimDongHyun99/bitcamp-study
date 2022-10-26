@@ -21,17 +21,16 @@ tr:hover {
       <th>작성자</th>
       <th>등록일</th>
     </tr>
-
     <tr data-th-each="board : ${boards}">
-      <td data-th-text="${board.no}"></td>
+      <td data-th-text="${board.no}">100</td>
       <td>
         <a href='detail?no=1'
           data-th-href="@{detail(no=${board.no})}"
-          data-th-text="${board.title == ''} ? '(제목없음)' : ${board.title}"></a>
+          data-th-text="${board.title == ''} ? '(제목없음)' : ${board.title}">제목</a>
       </td>
-      <td data-th-text="${board.viewCount}" ></td>
-      <td data-th-text="${board.writer.name}"></td>
-      <td data-th-text="${board.createdDate}"></td>
+      <td data-th-text="${board.viewCount}">17</td>
+      <td data-th-text="${board.writer.name}">홍길동</td>
+      <td data-th-text="${board.createdDate}">2022-1-1</td>
     </tr>
 
   </table>
