@@ -29,15 +29,12 @@ ALTER TABLE `app_board`
 ALTER TABLE `app_board`
   MODIFY COLUMN `bno` INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
 
--- 회원
-CREATE TABLE `app_member` (
-  `mno`   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+-- 게시
+CREATE TABLE `testtable` (
   `name`  VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-  `email` VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  `pwd`   VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
-  `cdt`   DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+  `pwd`   VARCHAR(100) NOT NULL COMMENT '내용', -- 암호
 )
-COMMENT '회원';
+COMMENT 게시글;
 
 -- 회원
 ALTER TABLE `app_member`
