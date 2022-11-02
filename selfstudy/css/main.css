@@ -5,4 +5,10 @@
 
 [data-fruit-name] {
   color: red;
+display: inline;
+grid-template-columns: 2;
+  margin-left: 15vw;
+  margin-right: 15vw;
 }
+
+
