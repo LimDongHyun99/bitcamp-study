@@ -1,6 +1,12 @@
 [type="password"] {
   background-color: yellow;
+margin-left: 20%;
+float: left;
+height: 25%;
+  min-width: 500px;
 
+  position: relative;
+  position:absolute;
 }
 
 [data-fruit-name] {
