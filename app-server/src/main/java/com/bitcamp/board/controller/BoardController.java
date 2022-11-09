@@ -44,14 +44,10 @@ public class BoardController {
 
   // InternalResourceViewResolver 사용 후:
   @GetMapping("form")
-  public void form() throws Exception {
-  }
+  public void form() throws Exception {}
 
-  @PostMapping("add") 
-  public String add(
-      Board board,
-      MultipartFile[] files,
-      HttpSession session) throws Exception {
+  @PostMapping("add")
+  public String add(Board board, Part[] files, HttpSession session) throws Exception {
 
     board.setAttachedFiles(saveAttachedFiles(files));
     board.setWriter((Member) session.getAttribute("loginMember"));
@@ -60,8 +56,7 @@ public class BoardController {
     return "redirect:list";
   }
 
-  private List<AttachedFile> saveAttachedFiles(Part[] files)
-      throws IOException, ServletException {
+  private List<AttachedFile> saveAttachedFiles(Part[] files) throws IOException, ServletException {
     List<AttachedFile> attachedFiles = new ArrayList<>();
     String dirPath = sc.getRealPath("/board/files");
 
@@ -112,11 +107,7 @@ public class BoardController {
   }
 
   @PostMapping("update")
-  public String update(
-      Board board,
-      Part[] files,
-      HttpSession session) 
-          throws Exception {
+  public String update(Board board, Part[] files, HttpSession session) throws Exception {
 
     board.setAttachedFiles(saveAttachedFiles(files));
 
@@ -137,10 +128,7 @@ public class BoardController {
   }
 
   @GetMapping("delete")
-  public String delete(
-      int no, 
-      HttpSession session) 
-          throws Exception {
+  public String delete(int no, HttpSession session) throws Exception {
 
     checkOwner(no, session);
     if (!boardService.delete(no)) {
@@ -151,15 +139,12 @@ public class BoardController {
   }
 
   @GetMapping("fileDelete")
-  public String fileDelete(
-      int no,
-      HttpSession session) 
-          throws Exception {
+  public String fileDelete(int no, HttpSession session) throws Exception {
 
-    AttachedFile attachedFile = boardService.getAttachedFile(no); 
+    AttachedFile attachedFile = boardService.getAttachedFile(no);
 
     Member loginMember = (Member) session.getAttribute("loginMember");
-    Board board = boardService.get(attachedFile.getBoardNo()); 
+    Board board = boardService.get(attachedFile.getBoardNo());
 
     if (board.getWriter().getNo() != loginMember.getNo()) {
       throw new Exception("게시글 작성자가 아닙니다.");
@@ -172,9 +157,5 @@ public class BoardController {
     return "redirect:detail?no=" + board.getNo();
   }
 }
-
-
-
-
 
 
