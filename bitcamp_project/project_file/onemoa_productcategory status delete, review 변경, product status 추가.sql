@@ -29,10 +29,10 @@ DROP TABLE IF EXISTS qna RESTRICT;
 DROP TABLE IF EXISTS qna_category RESTRICT;
 
 -- 후기 게시판
-DROP TABLE IF EXISTS product_review RESTRICT;
+DROP TABLE IF EXISTS order_review RESTRICT;
 
 -- 후기 첨부파일
-DROP TABLE IF EXISTS product_review_file RESTRICT;
+DROP TABLE IF EXISTS order_review_file RESTRICT;
 
 -- 공모전 카테고리
 DROP TABLE IF EXISTS contest_category RESTRICT;
@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS team_portfolio RESTRICT;
 DROP TABLE IF EXISTS team_member_portfolio RESTRICT;
 
 -- 주문상태 카테고리
-DROP TABLE IF EXISTS status_category RESTRICT;
+DROP TABLE IF EXISTS order_status RESTRICT;
 
 -- 회원
 CREATE TABLE member (
@@ -182,7 +182,8 @@ CREATE TABLE product (
   cdt       DATE         NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
   thumbnail VARCHAR(255) NULL     COMMENT '썸네일파일이름', -- 썸네일파일이름
   rule      MEDIUMTEXT   NULL     COMMENT '룰룰', -- 룰룰
-  selfintro MEDIUMTEXT   NULL     COMMENT '자기소개' -- 자기소개
+  selfintro MEDIUMTEXT   NULL     COMMENT '자기소개', -- 자기소개
+  status    BOOLEAN      NOT NULL DEFAULT 1 COMMENT '상태' -- 상태
 )
 COMMENT '재능판매';
 
@@ -340,29 +341,30 @@ CREATE UNIQUE INDEX UIX_qna_category
   );
 
 -- 후기 게시판
-CREATE TABLE product_review (
-  prno  INTEGER      NOT NULL COMMENT '후기글번호', -- 후기글번호
-  mno   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  title VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  cont  MEDIUMTEXT   NOT NULL COMMENT '내용', -- 내용
-  cdt   DATE         NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  score INTEGER      NOT NULL COMMENT '별점', -- 별점
-  pono  INTEGER      NOT NULL COMMENT '구매번호' -- 구매번호
+CREATE TABLE order_review (
+  prno   INTEGER      NOT NULL COMMENT '후기글번호', -- 후기글번호
+  mno    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  title  VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  cont   MEDIUMTEXT   NOT NULL COMMENT '내용', -- 내용
+  cdt    DATE         NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  pono   INTEGER      NOT NULL COMMENT '구매번호', -- 구매번호
+  status BOOLEAN      NOT NULL COMMENT '리뷰 구분', -- 리뷰 구분
+  score  DECIMAL(2,1) NOT NULL COMMENT '별점' -- 별점
 )
 COMMENT '후기 게시판';
 
 -- 후기 게시판
-ALTER TABLE product_review
-  ADD CONSTRAINT PK_product_review -- 후기 게시판 기본키
+ALTER TABLE order_review
+  ADD CONSTRAINT PK_order_review -- 후기 게시판 기본키
     PRIMARY KEY (
       prno -- 후기글번호
     );
 
-ALTER TABLE product_review
+ALTER TABLE order_review
   MODIFY COLUMN prno INTEGER NOT NULL AUTO_INCREMENT COMMENT '후기글번호';
 
 -- 후기 첨부파일
-CREATE TABLE product_review_file (
+CREATE TABLE order_review_file (
   prfno INTEGER      NOT NULL COMMENT '첨부파일번호', -- 첨부파일번호
   fname VARCHAR(255) NOT NULL COMMENT '파일이름', -- 파일이름
   fpath VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
@@ -371,13 +373,13 @@ CREATE TABLE product_review_file (
 COMMENT '후기 첨부파일';
 
 -- 후기 첨부파일
-ALTER TABLE product_review_file
-  ADD CONSTRAINT PK_product_review_file -- 후기 첨부파일 기본키
+ALTER TABLE order_review_file
+  ADD CONSTRAINT PK_order_review_file -- 후기 첨부파일 기본키
     PRIMARY KEY (
       prfno -- 첨부파일번호
     );
 
-ALTER TABLE product_review_file
+ALTER TABLE order_review_file
   MODIFY COLUMN prfno INTEGER NOT NULL AUTO_INCREMENT COMMENT '첨부파일번호';
 
 -- 공모전 카테고리
@@ -722,22 +724,22 @@ ALTER TABLE team_member_portfolio
   MODIFY COLUMN tmpno INTEGER NOT NULL AUTO_INCREMENT COMMENT '포트폴리오 번호';
 
 -- 주문상태 카테고리
-CREATE TABLE status_category (
-  scno   INTEGER      NOT NULL COMMENT '주문상태카테고리번호', -- 주문상태카테고리번호
-  scname VARCHAR(255) NOT NULL COMMENT '진행상태' -- 진행상태
+CREATE TABLE order_status (
+  scno INTEGER      NOT NULL COMMENT '주문상태카테고리번호', -- 주문상태카테고리번호
+  name VARCHAR(255) NOT NULL COMMENT '진행상태' -- 진행상태
 )
 COMMENT '주문상태 카테고리';
 
 -- 주문상태 카테고리
-ALTER TABLE status_category
-  ADD CONSTRAINT PK_status_category -- 주문상태 카테고리 기본키
+ALTER TABLE order_status
+  ADD CONSTRAINT PK_order_status -- 주문상태 카테고리 기본키
     PRIMARY KEY (
       scno -- 주문상태카테고리번호
     );
 
 -- 주문상태 카테고리 유니크 인덱스
-CREATE UNIQUE INDEX UIX_status_category
-  ON status_category ( -- 주문상태 카테고리
+CREATE UNIQUE INDEX UIX_order_status
+  ON order_status ( -- 주문상태 카테고리
   );
 
 -- 회원
@@ -851,8 +853,8 @@ ALTER TABLE qna
     );
 
 -- 후기 게시판
-ALTER TABLE product_review
-  ADD CONSTRAINT FK_member_TO_product_review -- 회원 -> 후기 게시판
+ALTER TABLE order_review
+  ADD CONSTRAINT FK_member_TO_order_review -- 회원 -> 후기 게시판
     FOREIGN KEY (
       mno -- 회원번호
     )
@@ -861,8 +863,8 @@ ALTER TABLE product_review
     );
 
 -- 후기 게시판
-ALTER TABLE product_review
-  ADD CONSTRAINT FK_product_order_TO_product_review -- 주문내역 -> 후기 게시판
+ALTER TABLE order_review
+  ADD CONSTRAINT FK_product_order_TO_order_review -- 주문내역 -> 후기 게시판
     FOREIGN KEY (
       pono -- 구매번호
     )
@@ -871,12 +873,12 @@ ALTER TABLE product_review
     );
 
 -- 후기 첨부파일
-ALTER TABLE product_review_file
-  ADD CONSTRAINT FK_product_review_TO_product_review_file -- 후기 게시판 -> 후기 첨부파일
+ALTER TABLE order_review_file
+  ADD CONSTRAINT FK_order_review_TO_order_review_file -- 후기 게시판 -> 후기 첨부파일
     FOREIGN KEY (
       prno -- 후기글번호
     )
-    REFERENCES product_review ( -- 후기 게시판
+    REFERENCES order_review ( -- 후기 게시판
       prno -- 후기글번호
     );
 
@@ -1012,11 +1014,11 @@ ALTER TABLE product_order
 
 -- 주문내역
 ALTER TABLE product_order
-  ADD CONSTRAINT FK_status_category_TO_product_order -- 주문상태 카테고리 -> 주문내역
+  ADD CONSTRAINT FK_order_status_TO_product_order -- 주문상태 카테고리 -> 주문내역
     FOREIGN KEY (
       scno -- 주문상태카테고리번호
     )
-    REFERENCES status_category ( -- 주문상태 카테고리
+    REFERENCES order_status ( -- 주문상태 카테고리
       scno -- 주문상태카테고리번호
     );
 
