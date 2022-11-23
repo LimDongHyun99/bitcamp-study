@@ -1,0 +1,116 @@
+      window.open 기록
+      // $("#review-add").click(function() {
+            //     setTimeout(function() {
+            //         $('#review-add-form').submit();
+            //         opener.location.reload();
+            //     }, 100);
+            //     // closeAction()
+            // });
+
+            $("#review-add").click(function() {
+                setTimeout(function() {
+                $('#review-add-form').submit()
+                opener.location.reload()
+                }, 100);
+                myModal();
+            });
+
+            function myModal() {
+                $('#Modal').on('shown.bs.modal', function () {
+                    $('#myInput').focus()
+                    reviewSaveBtn()
+                })
+            }
+
+            function reviewSaveBtn() {
+                window.confirm("리뷰 등록이 완료되었습니다");
+                opener.parent.location.reload();
+                window.close();
+            }
+
+            //
+            // function show() {
+            //     document.querySelector(".background").className = "background show";
+            // }
+            // function close() {
+            //     document.querySelector(".background").className = "background";
+            // }
+            // document.querySelector("#show").addEventListener("click", show);
+            // document.querySelector("#close").addEventListener("click", close);
+
+            // myAsync()
+            //
+            // async function myAsync() {
+            //     await delay(2000)
+            //     return 'windowCloser()';
+            // }
+            //
+            // function delay(ms) {
+            //     return new promise(resolve => setTimeout(resolve, ms))
+            // }
+            //
+            // windowCloser = function() {
+            //     window.close();
+            // }
+            //
+            // function closeAction () {
+            //     opener.location.reload();
+            //     window.close();
+            //
+            // const resolvedProm = Promise.resolve(33);
+            // opener.location.reload();
+            // let thenProm = resolvedProm.then(value => {
+            //     console.log("이 부분은 호출 스택 이후에 실행됩니다. 전달받은 값이자 반환값은 " + value + "입니다.");
+            //     return value;
+            // });
+            // // thenProm의 값을 즉시 기록
+            // console.log(thenProm);
+            //
+            // // setTimeout으로 함수 실행을 호출 스택이 빌 때까지 미룰 수 있음
+            // setTimeout(() => {
+            //     console.log(thenProm);
+            // });
+            //
+            //
+            // const promise1 = new Promise((resolve, reject) => {
+            //     resolve('Success!');
+            // });
+            //
+            // promise1.then((value) => {
+            //     console.log(value);
+            //     // expected output: "Success!"
+            // });
+            //
+                // $.ajax({
+                // type: "POST",
+                // url: "/onemoa/mypage/updateStatus",
+                // data: {"orderNo": orderNo, "orderStatus": orderStatus},
+                // success: function (result) {
+                //     $("#update-btn-" + saleNo).closest("tr").find("select").attr("disabled", true);
+                //     $("#update-btn-" + saleNo).attr("style", "display:block");
+                //     $("#save-btn-" + saleNo).attr("style", "display:none");
+                //     }, error:function(){
+                //             //에러가 났을 경우 실행시킬 코드
+                //         }
+                //     });
+            // }
+            // })
+            // });
+            // }
+            //
+            //            // $("#review-add").click(function() {
+            //     setTimeout(function() {
+            //     $('#review-add-form').submit();
+            //         opener.location.reload();
+            //     }, 100);
+
+            //
+            //
+            //
+            //     $("#review-add1").click(function() {
+            //     setTimeout(function() {
+            //     $('#review-add-form1').submit();
+            //         window.close();
+            //     }, 2000);
+            //     opener.parent.location.reload();
+            //     });
